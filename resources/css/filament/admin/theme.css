@@ -2,3 +2,7 @@
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
+
+.fi-modal-window-has-sticky-header.fi-modal-window-has-footer {
+  @apply overflow-y-auto;
+}

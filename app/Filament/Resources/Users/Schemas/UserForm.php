@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use App\Models\EndService;
+use App\Models\EndServiceQuestion;
+use App\Models\User;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
@@ -12,6 +15,12 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
+use Filament\Actions\Action;
+use Filament\Schemas\Components\Grid;
+use Filament\Support\Enums\Width;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\HtmlString;
+use Livewire\Livewire;
 
 class UserForm
 {
@@ -22,14 +31,10 @@ class UserForm
                 TextInput::make('first_name')->required(),
                 TextInput::make('last_name')->required(),
                 TextInput::make('staff_id')->required(),
+                TextInput::make('email')->required(),
                 DatePicker::make('date_of_birth')->native(false)->maxDate(now()->subYears(18))->default(now()->subYears(18))->required(),
                 Select::make('department_id')->relationship('department', 'name')->required()->native(false),
                 TextInput::make('password')->password()->revealable()->hiddenOn('edit'),
-                Section::make('Passport Details')
-                    ->schema([
-                        DatePicker::make('passport_expiry')->native(false)->requiredWith('passport_file'),
-                        FileUpload::make('passport_file')->directory('files')->requiredWith('passport_expiry'),
-                    ])->columnSpanFull(),
                 Tabs::make('Tabs')
                     ->tabs([
                         Tab::make('Phone Numbers')
@@ -40,6 +45,11 @@ class UserForm
                                     ->simple(
                                         TextInput::make('phone_no')->tel()->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
                                     ),
+                            ]),
+                        Tab::make('Passport')
+                            ->schema([
+                                DatePicker::make('passport_expiry')->native(false)->requiredWith('passport_file'),
+                                FileUpload::make('passport_file')->directory('files')->requiredWith('passport_expiry'),
                             ]),
                         Tab::make('Addresses')
                             ->schema([
@@ -85,7 +95,26 @@ class UserForm
                                         Select::make('type_id')->relationship('type', 'name')->requiredWith(['expiry', 'file'])->native(false),
                                     ])
                             ]),
-                    ])->columnSpanFull()
+                        Tab::make('End Services')
+                            ->schema([
+                                Repeater::make('endservices')
+                                    ->relationship()
+                                    ->schema([
+                                        Grid::make()->schema([
+                                            Repeater::make('Procedure')->label("Procedure")
+                                                ->relationship('responses', fn($query) => $query->whereHas('question', fn($q) => $q->where('type_id', 1))->orderBy("id"))
+                                                ->schema([
+                                                    DatePicker::make("text")->native(false)->label(fn($get, $record) => $record->question?->text ?? 'No question')
+                                                ])->deletable(false)->addable(false),
+                                            Repeater::make('Recitals')->label("Recitals")
+                                                ->relationship('responses', fn($query) => $query->whereHas('question', fn($q) => $q->where('type_id', 2))->orderBy("id"))
+                                                ->schema([
+                                                    TextInput::make("text")->label(fn($get, $record) => $record->question?->text ?? 'No question')
+                                                ])->deletable(false)->addable(false)
+                                        ])
+                                    ])->addable(false)->collapsible()->collapsed(true),
+                            ])->hiddenOn('create'),
+                    ])->columnSpanFull()->persistTab()
             ]);
     }
 }

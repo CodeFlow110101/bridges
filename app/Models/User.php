@@ -70,6 +70,11 @@ class User extends Authenticatable implements HasName
         return $this->belongsTo(Department::class, 'department_id', 'id');
     }
 
+    public function endservices(): HasMany
+    {
+        return $this->hasMany(EndService::class, "user_id", "id");
+    }
+
     protected function fullName(): Attribute
     {
         return Attribute::make(
