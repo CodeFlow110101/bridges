@@ -13,8 +13,16 @@ class MedicalRecordTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        MedicalRecordType::where('id', 1)->firstOrCreate(["name" => "Hepatitis B"]);
-        MedicalRecordType::where('id', 2)->firstOrCreate(["name" => "Health Declaration Certificate"]);
-        MedicalRecordType::where('id', 3)->firstOrCreate(["name" => "Basic Life Support"]);
+        collect([
+            "Hepatitis B",
+            "Health Declaration Certificate",
+            "Basic Life Support",
+        ])->each(
+            fn($name, $id) =>
+            MedicalRecordType::updateOrCreate(
+                ["id" => $id + 1],
+                ["name" => $name]
+            )
+        );
     }
 }

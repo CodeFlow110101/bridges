@@ -16,11 +16,20 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::where('id', 1)->firstOrCreate([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'email' => 'admin@test.com',
-            'password' => Hash::make("12345678"),
+        User::updateOrCreate(
+            ["id" => 1],
+            [
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'email' => 'admin@test.com',
+                'password' => Hash::make("12345678"),
+            ]
+        );
+
+        $this->call([
+            DepartmentSeeder::class,
+            MedicalRecordTypeSeeder::class,
+            EndServiceSeeder::class,
         ]);
     }
 }

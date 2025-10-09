@@ -13,15 +13,17 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        Department::where('id', 1)->firstOrCreate(["name" => "Speech Therapy"]);
-        Department::where('id', 2)->firstOrCreate(["name" => "ABA"]);
-        Department::where('id', 3)->firstOrCreate(["name" => "Occupational Therapy"]);
-        Department::where('id', 4)->firstOrCreate(["name" => "Physiotherapy"]);
-        Department::where('id', 5)->firstOrCreate(["name" => "Psychology"]);
-        Department::where('id', 6)->firstOrCreate(["name" => "Readiness Program"]);
-        Department::where('id', 7)->firstOrCreate(["name" => "Admin"]);
-        Department::where('id', 8)->firstOrCreate(["name" => "Clinic Manager"]);
-        Department::where('id', 9)->firstOrCreate(["name" => "Cleaning Staff"]);
-        Department::where('id', 10)->firstOrCreate(["name" => "Clinic (MS)"]);
+        collect([
+            "Speech Therapy",
+            "ABA",
+            "Occupational Therapy",
+            "Physiotherapy",
+            "Psychology",
+            "Readiness Program",
+            "Admin",
+            "Clinic Manager",
+            "Cleaning Staff",
+            "Clinic (MS)",
+        ])->each(fn($name, $id) => Department::updateOrCreate(["id" => $id + 1], ["name" => $name]));
     }
 }
