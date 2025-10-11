@@ -75,6 +75,21 @@ class User extends Authenticatable implements HasName
         return $this->hasMany(EndService::class, "user_id", "id");
     }
 
+    public function warningletters(): HasMany
+    {
+        return $this->hasMany(WarningLetter::class, "user_id", "id");
+    }
+
+    public function kpis(): HasMany
+    {
+        return $this->hasMany(KeyPerformanceIndicator::class, "user_id", "id");
+    }
+
+    public function disputes(): HasMany
+    {
+        return $this->hasMany(DisputeManagement::class, "user_id", "id");
+    }
+
     protected function fullName(): Attribute
     {
         return Attribute::make(

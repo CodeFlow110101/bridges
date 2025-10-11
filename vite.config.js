@@ -12,7 +12,8 @@ export default defineConfig({
         "app/Livewire/**/*.php",
         "app/Filament/**/*.php",
         "app/Providers/Filament/AdminPanelProvider.php",
-        "routes/**/*.php"
+        "routes/**/*.php",
+        "public/js/alpine.js"
       ]
     }),
     tailwindcss()

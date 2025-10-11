@@ -2,7 +2,12 @@
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
+@source '../../../../vendor/saade/filament-autograph/resources/views/**/*.blade.php';
 
 .fi-modal-window-has-sticky-header.fi-modal-window-has-footer {
   @apply overflow-y-auto;
+}
+
+.fi-sc-unordered-list {
+  @apply columns-1;
 }
