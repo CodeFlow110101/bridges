@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date("date_of_issue");
             $table->text("brief_description_of_the_issue_concern");
-            $table->text("describe_any_relevant_background_information_or_events_leading_up_to_the_problem");
+            $table->text("describe_any_relevant_background_information");
             $table->text("explain_the_effects_or_consequences_of_the_problem");
             $table->date("should_be_completed_by_deadline");
             $table->string("email_address_to_respond_to");

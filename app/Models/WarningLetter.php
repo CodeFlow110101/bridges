@@ -13,7 +13,7 @@ class WarningLetter extends Model
         'user_id',
         'date_of_issue',
         'brief_description_of_the_issue_concern',
-        'describe_any_relevant_background_information_or_events_leading_up_to_the_problem',
+        'describe_any_relevant_background_information',
         'explain_the_effects_or_consequences_of_the_problem',
         'should_be_completed_by_deadline',
         'email_address_to_respond_to',
