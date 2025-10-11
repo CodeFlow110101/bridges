@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('warning_letters', function (Blueprint $table) {
             $table->text('brief_description_of_the_issue_concern')->nullable()->change();
-            $table->text('describe_any_relevant_background_information_or_events_leading_up_to_the_problem')->nullable()->change();
+            $table->text('describe_any_relevant_background_information')->nullable()->change();
             $table->text('explain_the_effects_or_consequences_of_the_problem')->nullable()->change();
             $table->date('should_be_completed_by_deadline')->nullable()->change();
             $table->string('email_address_to_respond_to')->nullable()->change();
