@@ -13,7 +13,7 @@ class Dashboard extends BaseDashboard
 
     public function getColumns(): int | array
     {
-        return 2;
+        return ["sm" => 2, "max-sm" => 1];
     }
 
     public function getWidgetsContentComponent(): Component

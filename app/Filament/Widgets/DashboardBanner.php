@@ -9,7 +9,7 @@ class DashboardBanner extends Widget
 
     public function getColumnSpan(): int | string | array
     {
-        return 2;
+        return  ["sm" => 2, "max-sm" => 1];
     }
 
     protected string $view = 'volt-livewire::filament.widgets.dashboard-banner';
