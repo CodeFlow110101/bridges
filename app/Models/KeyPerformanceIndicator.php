@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -27,6 +28,11 @@ class KeyPerformanceIndicator extends Model
         'directors_signature',
         'hod_supervisor_2nd_signature',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, "user_id", "id");
+    }
 
     public function kpiStrengthAndSkill(): HasMany
     {

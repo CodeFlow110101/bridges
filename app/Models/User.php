@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable implements HasName
 {
@@ -88,6 +89,11 @@ class User extends Authenticatable implements HasName
     public function disputes(): HasMany
     {
         return $this->hasMany(DisputeManagement::class, "user_id", "id");
+    }
+
+    public function inductionprograms(): HasOne
+    {
+        return $this->hasOne(InductionProgram::class, "user_id", "id");
     }
 
     protected function fullName(): Attribute
