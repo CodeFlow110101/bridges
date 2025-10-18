@@ -73,9 +73,11 @@ class KeyPerformanceIndicatorForm
                                     ->deletable(false)
                                     ->label(fn($get, $record) => new HtmlString("<div></div>"))
                                     ->addActionLabel('Add')
-                                    ->schema(KeyPerformanceIndicator::getTarget1Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(onBlur: true)->afterStateUpdated(function ($state, Get $get, Set $set) use ($column) {
-                                        $set("administration_total", KeyPerformanceIndicator::getTarget1Columns()->forget($column)->pipe(fn($columns) => $columns)->map(fn($columns) => $get($columns))->sum());
-                                    }))
+                                    ->schema(KeyPerformanceIndicator::getTarget1Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(onBlur: true)
+                                        ->partiallyRenderComponentsAfterStateUpdated(['administration_total'])
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) use ($column) {
+                                            $set("administration_total", KeyPerformanceIndicator::getTarget1Columns()->forget($column)->pipe(fn($columns) => $columns)->map(fn($columns) => $get($columns))->sum());
+                                        }))
                                         ->push(TextInput::make('administration_total')->formatStateUsing(fn($livewire) => $livewire->record?->target1Score)->disabled())
                                         ->all())
                             ]),
@@ -90,9 +92,11 @@ class KeyPerformanceIndicatorForm
                                     ->deletable(false)
                                     ->label(fn() => new HtmlString("<div></div>"))
                                     ->addActionLabel('Add')
-                                    ->schema(KeyPerformanceIndicator::getTarget2Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(onBlur: true)->afterStateUpdated(function ($state, Get $get, Set $set) use ($column) {
-                                        $set("planning_total", KeyPerformanceIndicator::getTarget2Columns()->forget($column)->pipe(fn($columns) => $columns)->map(fn($columns) => $get($columns))->sum());
-                                    }))
+                                    ->schema(KeyPerformanceIndicator::getTarget2Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(onBlur: true)
+                                        ->partiallyRenderComponentsAfterStateUpdated(['planning_total'])
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) use ($column) {
+                                            $set("planning_total", KeyPerformanceIndicator::getTarget2Columns()->forget($column)->pipe(fn($columns) => $columns)->map(fn($columns) => $get($columns))->sum());
+                                        }))
                                         ->push(TextInput::make('planning_total')->formatStateUsing(fn($livewire) => $livewire->record?->target2Score)->disabled())
                                         ->all())
                             ]),
@@ -107,9 +111,11 @@ class KeyPerformanceIndicatorForm
                                     ->deletable(false)
                                     ->label(fn() => new HtmlString("<div></div>"))
                                     ->addActionLabel('Add')
-                                    ->schema(KeyPerformanceIndicator::getTarget3Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(onBlur: true)->afterStateUpdated(function ($state, Get $get, Set $set) use ($column) {
-                                        $set("performance_total", KeyPerformanceIndicator::getTarget3Columns()->forget($column)->pipe(fn($columns) => $columns)->map(fn($columns) => $get($columns))->sum());
-                                    }))
+                                    ->schema(KeyPerformanceIndicator::getTarget3Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(onBlur: true)
+                                        ->partiallyRenderComponentsAfterStateUpdated(['performance_total'])
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) use ($column) {
+                                            $set("performance_total", KeyPerformanceIndicator::getTarget3Columns()->forget($column)->pipe(fn($columns) => $columns)->map(fn($columns) => $get($columns))->sum());
+                                        }))
                                         ->push(TextInput::make('performance_total')->formatStateUsing(fn($livewire) => $livewire->record?->target3Score)->disabled())
                                         ->all())
                             ])
