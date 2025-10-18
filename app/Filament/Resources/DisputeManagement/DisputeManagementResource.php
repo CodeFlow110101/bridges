@@ -15,12 +15,15 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use App\Filament\Pages\HumanResource as PagesHumanResource;
 
 class DisputeManagementResource extends Resource
 {
     protected static ?string $model = DisputeManagement::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    public static ?string $parentPage = PagesHumanResource::class;
 
     protected static bool $shouldRegisterNavigation = false;
 

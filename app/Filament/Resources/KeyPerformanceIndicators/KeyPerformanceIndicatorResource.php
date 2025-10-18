@@ -15,12 +15,15 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use App\Filament\Pages\HumanResource as PagesHumanResource;
 
 class KeyPerformanceIndicatorResource extends Resource
 {
     protected static ?string $model = KeyPerformanceIndicator::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    public static ?string $parentPage = PagesHumanResource::class;
 
     protected static bool $shouldRegisterNavigation = false;
 

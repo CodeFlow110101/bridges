@@ -5,12 +5,14 @@ namespace App\Filament\Resources\EndServices\Schemas;
 use App\Models\EndServiceQuestion;
 use App\Models\User;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 
@@ -31,7 +33,13 @@ class EndServiceForm
                     ->schema([
                         Repeater::make("procedure")->relationship("responses", fn($query) => $query->whereHas("question", fn($query) => $query->where("type_id", 1)))
                             ->schema([
-                                DatePicker::make("text")->native(false)->label(fn($get) => $get("question"))
+                                DatePicker::make("text")->native(false)->label(fn($get) => $get("question"))->requiredIfAccepted('is_complete')->validationAttribute('question')->disabled(fn(Get $get): bool => !$get('is_complete')),
+                                Radio::make('is_complete')
+                                    ->label("Complete/ Incomplete")
+                                    ->boolean(trueLabel: 'Complete!')
+                                    ->boolean(falseLabel: 'Incomplete')
+                                    ->inline()
+                                    ->live()
                             ])->deletable(false)->reorderable(false)->addable(false)->label(fn() => new HtmlString("<div></div>"))->mutateRelationshipDataBeforeFillUsing(function (array $data) use ($questions): array {
                                 return collect($data)->put("question", $questions->where("id", collect($data)->get("question_id"))->first()->text)->all();
                             })

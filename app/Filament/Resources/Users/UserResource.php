@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users;
 
+use App\Filament\Pages\HumanResource as PagesHumanResource;
 use App\Filament\Resources\Users\Pages\CreateUser;
 use App\Filament\Resources\Users\Pages\EditUser;
 use App\Filament\Resources\Users\Pages\HumanResource;
@@ -17,7 +18,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-
+use Illuminate\Support\HtmlString;
 use UnitEnum;
 
 class UserResource extends Resource
@@ -29,6 +30,8 @@ class UserResource extends Resource
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $modelLabel = 'Staff Details';
+
+    public static ?string $parentPage = PagesHumanResource::class;
 
     public static function form(Schema $schema): Schema
     {

@@ -34,6 +34,14 @@ class User extends Authenticatable implements HasName
         'passport_file',
         'passport_expiry',
         'department_id',
+        'induction_program_sheet',
+        'introduction_status',
+        'introduction_to_director',
+        'introduction_to_supervisors',
+        'introduction_to_pantry_area',
+        'introduction_to_toy_room_work_area',
+        'introduction_to_resource_room',
+        'introduction_to_training_area',
     ];
 
     public function phonenos(): HasMany
@@ -59,6 +67,26 @@ class User extends Authenticatable implements HasName
     public function licences(): HasMany
     {
         return $this->hasMany(Licence::class, "user_id", "id");
+    }
+
+    public function emirates(): HasMany
+    {
+        return $this->hasMany(Emirate::class, "user_id", "id");
+    }
+
+    public function degrees(): HasMany
+    {
+        return $this->hasMany(Degree::class, "user_id", "id");
+    }
+
+    public function banks(): HasMany
+    {
+        return $this->hasMany(Bank::class, "user_id", "id");
+    }
+
+    public function references(): HasMany
+    {
+        return $this->hasMany(Reference::class, "user_id", "id");
     }
 
     public function medicalRecords(): HasMany
@@ -89,6 +117,11 @@ class User extends Authenticatable implements HasName
     public function disputes(): HasMany
     {
         return $this->hasMany(DisputeManagement::class, "user_id", "id");
+    }
+
+    public function handbooks(): HasMany
+    {
+        return $this->hasMany(Handbook::class, "user_id", "id");
     }
 
     public function inductionprograms(): HasOne

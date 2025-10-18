@@ -34,6 +34,7 @@ class InductionProgramForm
                     ->afterStateUpdated(function ($state, $set) {
                         $set('selected_user', User::find($state));
                     }),
+                TextInput::make('job_title'),
                 Text::make("This is a checklist of information for Induction which HR Officer/supervisors should use with new staff as part of their induction programme within the first two weeks of employment. Health and Safety measures will be identified at immediately. The new employee should be asked to tick each subject as he/she has been informed about it, and sign the end of the form. The HR /supervisor then keeps the form for inclusion in the employee’s personnel file."),
                 Section::make("Items to Cover with Each New Employee")
                     ->schema(

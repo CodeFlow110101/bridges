@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 class Resource extends StatsOverviewWidget
 {
 
+    protected static bool $isLazy = false;
     public $classes;
 
     protected function getColumns(): int | array | null
@@ -25,7 +26,7 @@ class Resource extends StatsOverviewWidget
     protected function getStats(): array
     {
         return collect($this->classes)->map(fn($class) => Stat::make(Str::headline($class::getModelLabel()), $class::getModel()::count())->extraAttributes([
-            'class' => 'cursor-pointer',
+            'class' => 'navigation-widget',
             'wire:click' => "redirectToResource('" . $class::getUrl("index") . "')",
         ]))->all();
     }

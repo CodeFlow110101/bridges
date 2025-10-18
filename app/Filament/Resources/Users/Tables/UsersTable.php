@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Users\Tables;
 
 use App\Models\User;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -17,7 +18,9 @@ class UsersTable
     {
         return $table
             ->columns([
+                TextColumn::make('staff_id'),
                 TextColumn::make('fullName'),
+                TextColumn::make('email'),
                 TextColumn::make('phonenos.0.phone_no')->label("Phone No"),
                 TextColumn::make('department.name'),
             ])

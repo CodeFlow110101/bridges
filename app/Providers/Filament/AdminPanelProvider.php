@@ -5,10 +5,13 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\HumanResource;
 use App\Filament\Resources\DisputeManagement\DisputeManagementResource;
 use App\Filament\Resources\EndServices\EndServiceResource;
+use App\Filament\Resources\Handbooks\HandbookResource;
 use App\Filament\Resources\InductionPrograms\InductionProgramResource;
 use App\Filament\Resources\KeyPerformanceIndicators\KeyPerformanceIndicatorResource;
+use App\Filament\Resources\Users\Pages\ListUsers;
 use App\Filament\Resources\Users\UserResource;
 use App\Filament\Resources\WarningLetters\WarningLetterResource;
+use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -29,6 +32,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Support\Assets\Js;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -84,7 +90,9 @@ class AdminPanelProvider extends PanelProvider
                     ->url(fn(): string => HumanResource::getUrl())
                     ->group('Clinical Management')
                     ->isActiveWhen(function () {
-                        $routes = collect([UserResource::class, EndServiceResource::class, WarningLetterResource::class, DisputeManagementResource::class, KeyPerformanceIndicatorResource::class, InductionProgramResource::class])
+                        $routes = collect(HumanResource::getResources())
+                            ->map(fn($resource) => collect($resource)->last()['classes'])
+                            ->pipe(fn($resources) => collect(collect($resources)->first()))
                             ->map(function ($resource) {
                                 return collect($resource::getPages())->map(function ($page) {
                                     return collect($page)->first()::getNavigationItemActiveRoutePattern();

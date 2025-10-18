@@ -15,7 +15,7 @@ class MedicalRecordTypeSeeder extends Seeder
     {
         collect([
             "Hepatitis B",
-            "Health Declaration Certificate",
+            "DHA /CDA license",
             "Basic Life Support",
         ])->each(
             fn($name, $id) =>

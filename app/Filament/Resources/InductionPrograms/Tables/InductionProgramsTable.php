@@ -15,7 +15,10 @@ class InductionProgramsTable
     {
         return $table
             ->columns([
-                TextColumn::make("user.fullname")
+                TextColumn::make('user.staff_id')->label("Staff Id"),
+                TextColumn::make('user.fullname')->label("Full Name"),
+                TextColumn::make('user.department.name')->label("Department Name"),
+                TextColumn::make('job_title'),
             ])
             ->filters([
                 //

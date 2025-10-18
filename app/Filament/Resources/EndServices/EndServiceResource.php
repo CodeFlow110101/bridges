@@ -15,12 +15,15 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use App\Filament\Pages\HumanResource as PagesHumanResource;
 
 class EndServiceResource extends Resource
 {
     protected static ?string $model = EndService::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    public static ?string $parentPage = PagesHumanResource::class;
 
     protected static bool $shouldRegisterNavigation = false;
 
@@ -50,7 +53,6 @@ class EndServiceResource extends Resource
     {
         return [
             'index' => ListEndServices::route('/'),
-            // 'create' => CreateEndService::route('/create'),
             'view' => ViewEndService::route('/{record}'),
             'edit' => EditEndService::route('/{record}/edit'),
         ];

@@ -55,4 +55,13 @@ class EditUser extends EditRecord
             })->stickyModalHeader()->stickyModalFooter()->modalWidth(Width::SevenExtraLarge)
         ];
     }
+
+    function getBreadcrumbs(): array
+    {
+        return [
+            self::$resource::$parentPage::getUrl() => self::$resource::$parentPage::getHeadingForPages(),
+            ...$this->getResourceBreadcrumbs(),
+            $this->getBreadcrumb(),
+        ];
+    }
 }

@@ -8,4 +8,13 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateDisputeManagement extends CreateRecord
 {
     protected static string $resource = DisputeManagementResource::class;
+
+    function getBreadcrumbs(): array
+    {
+        return [
+            self::$resource::$parentPage::getUrl() => self::$resource::$parentPage::getHeadingForPages(),
+            ...$this->getResourceBreadcrumbs(),
+            $this->getBreadcrumb(),
+        ];
+    }
 }

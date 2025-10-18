@@ -18,4 +18,13 @@ class EditDisputeManagement extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    function getBreadcrumbs(): array
+    {
+        return [
+            self::$resource::$parentPage::getUrl() => self::$resource::$parentPage::getHeadingForPages(),
+            ...$this->getResourceBreadcrumbs(),
+            $this->getBreadcrumb(),
+        ];
+    }
 }

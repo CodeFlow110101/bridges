@@ -14,6 +14,7 @@ class InductionProgram extends Model
     protected $fillable = [
 
         'user_id',
+        'job_title',
         'date',
         'signature',
         'hr_name',
