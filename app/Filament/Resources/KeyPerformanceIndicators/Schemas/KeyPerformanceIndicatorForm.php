@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\KeyPerformanceIndicators\Schemas;
 
+use App\Models\KeyPerformanceIndicator;
 use App\Models\User;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Radio;
@@ -16,6 +17,8 @@ use Filament\Support\Enums\TextSize;
 use Illuminate\Support\HtmlString;
 use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\UnorderedList;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 class KeyPerformanceIndicatorForm
@@ -70,15 +73,11 @@ class KeyPerformanceIndicatorForm
                                     ->deletable(false)
                                     ->label(fn($get, $record) => new HtmlString("<div></div>"))
                                     ->addActionLabel('Add')
-                                    ->schema(
-                                        collect([
-                                            'attendance_reporting_time',
-                                            'rapport_with_administration_desk',
-                                            'report_writing_skills',
-                                            'maintaining_body_checklist',
-                                            'property_premise_care',
-                                        ])->map(fn($column) => TextInput::make($column)->mask('99')->default(0))->all()
-                                    )
+                                    ->schema(KeyPerformanceIndicator::getTarget1Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(onBlur: true)->afterStateUpdated(function ($state, Get $get, Set $set) use ($column) {
+                                        $set("administration_total", KeyPerformanceIndicator::getTarget1Columns()->forget($column)->pipe(fn($columns) => $columns)->map(fn($columns) => $get($columns))->sum());
+                                    }))
+                                        ->push(TextInput::make('administration_total')->formatStateUsing(fn($livewire) => $livewire->record?->target1Score)->disabled())
+                                        ->all())
                             ]),
                         Section::make('Target 2: Planning and Organization')
                             ->collapsible()
@@ -89,18 +88,13 @@ class KeyPerformanceIndicatorForm
                                     ->defaultItems(1)
                                     ->maxItems(1)
                                     ->deletable(false)
-                                    ->label(fn($get, $record) => new HtmlString("<div></div>"))
+                                    ->label(fn() => new HtmlString("<div></div>"))
                                     ->addActionLabel('Add')
-                                    ->schema(
-                                        collect([
-                                            'planning_of_session',
-                                            'supporting_fellow_therapist',
-                                            'creativity_customization_as_per_client',
-                                            'clean_and_organized_station',
-                                            'problem_solving',
-                                            'counselling',
-                                        ])->map(fn($column) => TextInput::make($column)->mask('99')->default(0))->all()
-                                    )
+                                    ->schema(KeyPerformanceIndicator::getTarget2Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(onBlur: true)->afterStateUpdated(function ($state, Get $get, Set $set) use ($column) {
+                                        $set("planning_total", KeyPerformanceIndicator::getTarget2Columns()->forget($column)->pipe(fn($columns) => $columns)->map(fn($columns) => $get($columns))->sum());
+                                    }))
+                                        ->push(TextInput::make('planning_total')->formatStateUsing(fn($livewire) => $livewire->record?->target2Score)->disabled())
+                                        ->all())
                             ]),
                         Section::make('Target 3: Performance and conduct')
                             ->collapsible()
@@ -111,18 +105,13 @@ class KeyPerformanceIndicatorForm
                                     ->defaultItems(1)
                                     ->maxItems(1)
                                     ->deletable(false)
-                                    ->label(fn($get, $record) => new HtmlString("<div></div>"))
+                                    ->label(fn() => new HtmlString("<div></div>"))
                                     ->addActionLabel('Add')
-                                    ->schema(
-                                        collect([
-                                            'communication_skills',
-                                            'decision_making',
-                                            'initiation',
-                                            'consistent_performance',
-                                            'grooming_presentation_skills',
-                                            'teamwork',
-                                        ])->map(fn($column) => TextInput::make($column)->mask('99')->default(0))->all()
-                                    )
+                                    ->schema(KeyPerformanceIndicator::getTarget3Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(onBlur: true)->afterStateUpdated(function ($state, Get $get, Set $set) use ($column) {
+                                        $set("performance_total", KeyPerformanceIndicator::getTarget3Columns()->forget($column)->pipe(fn($columns) => $columns)->map(fn($columns) => $get($columns))->sum());
+                                    }))
+                                        ->push(TextInput::make('performance_total')->formatStateUsing(fn($livewire) => $livewire->record?->target3Score)->disabled())
+                                        ->all())
                             ])
                     ]),
 

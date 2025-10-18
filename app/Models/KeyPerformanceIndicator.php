@@ -29,6 +29,65 @@ class KeyPerformanceIndicator extends Model
         'hod_supervisor_2nd_signature',
     ];
 
+    static function getTarget1Columns()
+    {
+        return collect([
+            'attendance_reporting_time',
+            'rapport_with_administration_desk',
+            'report_writing_skills',
+            'maintaining_body_checklist',
+            'property_premise_care',
+        ]);
+    }
+
+    static function getTarget2Columns()
+    {
+        return collect([
+            'planning_of_session',
+            'supporting_fellow_therapist',
+            'creativity_customization_as_per_client',
+            'clean_and_organized_station',
+            'problem_solving',
+            'counselling',
+        ]);
+    }
+
+    static function getTarget3Columns()
+    {
+        return collect([
+            'communication_skills',
+            'decision_making',
+            'initiation',
+            'consistent_performance',
+            'grooming_presentation_skills',
+            'teamwork',
+        ]);
+    }
+
+    public function getScoreAttribute()
+    {
+        return collect([
+            $this->target1Score,
+            $this->target2Score,
+            $this->target3Score,
+        ])->sum();
+    }
+
+    public function getTarget1ScoreAttribute()
+    {
+        return collect($this->target1->only(self::getTarget1Columns()->all()))->sum();
+    }
+
+    public function getTarget2ScoreAttribute()
+    {
+        return collect($this->target2->only(self::getTarget2Columns()->all()))->sum();
+    }
+
+    public function getTarget3ScoreAttribute()
+    {
+        return collect($this->target3->only(self::getTarget3Columns()->all()))->sum();
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, "user_id", "id");

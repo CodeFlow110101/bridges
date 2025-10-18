@@ -19,6 +19,7 @@ class KeyPerformanceIndicatorsTable
                 TextColumn::make('user.fullname')->label("Full Name"),
                 TextColumn::make('user.department.name')->label("Department Name"),
                 TextColumn::make('evaluation_period')->label("Department Name"),
+                TextColumn::make("score")
             ])
             ->filters([
                 //
