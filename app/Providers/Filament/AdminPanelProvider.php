@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Administration;
 use App\Filament\Pages\HumanResource;
 use App\Filament\Resources\DisputeManagement\DisputeManagementResource;
 use App\Filament\Resources\EndServices\EndServiceResource;
@@ -85,6 +86,22 @@ class AdminPanelProvider extends PanelProvider
                     ->label('Clinical Management')
             ])
             ->navigationItems([
+                NavigationItem::make('Administration')
+                    ->label(fn(): string => Administration::getNavigationLabel())
+                    ->url(fn(): string => Administration::getUrl())
+                    ->group('Clinical Management')
+                    ->isActiveWhen(function () {
+                        $routes = collect(Administration::getResources())
+                            ->map(fn($resource) => collect($resource)->last()['classes'])
+                            ->pipe(fn($resources) => collect(collect($resources)->first()))
+                            ->map(function ($resource) {
+                                return collect($resource::getPages())->map(function ($page) {
+                                    return collect($page)->first()::getNavigationItemActiveRoutePattern();
+                                })->values();
+                            })->flatten()->push("filament.admin.pages.administration");
+
+                        return collect($routes)->contains(fn($route) => request()->routeIs($route));
+                    }),
                 NavigationItem::make('Human Resource')
                     ->label(fn(): string => HumanResource::getNavigationLabel())
                     ->url(fn(): string => HumanResource::getUrl())
