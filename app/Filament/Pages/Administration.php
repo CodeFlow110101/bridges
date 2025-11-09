@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Resources\Enquiries\EnquiryResource;
 use App\Filament\Resources\Interventions\InterventionResource;
 use App\Livewire\Resource;
 use Filament\Pages\Page;
@@ -25,7 +26,7 @@ class Administration extends Page
     static function getResources()
     {
         return [
-            Resource::make(["classes" => [InterventionResource::class]]),
+            Resource::make(["classes" => [InterventionResource::class, EnquiryResource::class]]),
         ];
     }
 }
