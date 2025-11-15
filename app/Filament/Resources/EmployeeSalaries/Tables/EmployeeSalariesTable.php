@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\EmployeeSalaries\Tables;
 
+use App\Models\EmployeeSalary;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -15,46 +17,8 @@ class EmployeeSalariesTable
     {
         return $table
             ->columns([
-                TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('company_name')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('designation')
-                    ->searchable(),
-                TextColumn::make('joining_date')
-                    ->date()
-                    ->sortable(),
-                TextColumn::make('emergency_contact_details')
-                    ->searchable(),
-                TextColumn::make('pay_period')
-                    ->date()
-                    ->sortable(),
-                TextColumn::make('basic_salary')
-                    ->searchable(),
-                TextColumn::make('hra')
-                    ->searchable(),
-                TextColumn::make('other_allowances')
-                    ->searchable(),
-                TextColumn::make('loss_of_pay_amount')
-                    ->searchable(),
-                TextColumn::make('total_earnings')
-                    ->searchable(),
-                TextColumn::make('total_advance_taken')
-                    ->searchable(),
-                TextColumn::make('total_advance_balance')
-                    ->searchable(),
-                TextColumn::make('final_salary')
-                    ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('user.full_name'),
+                TextColumn::make('company_name')->formatStateUsing(fn($state) => collect(EmployeeSalary::companies())->get($state)),
             ])
             ->filters([
                 //
@@ -62,10 +26,11 @@ class EmployeeSalariesTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                DeleteAction::make()
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    // DeleteBulkAction::make(),
                 ]),
             ]);
     }
