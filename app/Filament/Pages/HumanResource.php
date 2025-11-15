@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Resources\DisputeManagement\DisputeManagementResource;
+use App\Filament\Resources\EmployeeSalaries\EmployeeSalaryResource;
 use App\Filament\Resources\EndServices\EndServiceResource;
 use App\Filament\Resources\Handbooks\HandbookResource;
 use App\Filament\Resources\InductionPrograms\InductionProgramResource;
@@ -41,7 +42,7 @@ class HumanResource extends Page
     static function getResources()
     {
         return [
-            Resource::make(["classes" => [UserResource::class, EndServiceResource::class, WarningLetterResource::class, DisputeManagementResource::class, KeyPerformanceIndicatorResource::class, InductionProgramResource::class, HandbookResource::class]]),
+            Resource::make(["classes" => [UserResource::class, EndServiceResource::class, WarningLetterResource::class, DisputeManagementResource::class, KeyPerformanceIndicatorResource::class, InductionProgramResource::class, HandbookResource::class, EmployeeSalaryResource::class]]),
         ];
     }
 }
