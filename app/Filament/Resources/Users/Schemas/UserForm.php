@@ -96,6 +96,7 @@ class UserForm
                         Tab::make('Addresses')
                             ->schema([
                                 Repeater::make('addresses')
+                                    ->relationship()
                                     ->simple(
                                         Textarea::make('address'),
                                     )

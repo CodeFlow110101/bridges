@@ -8,6 +8,8 @@ use App\Filament\Resources\EndServices\EndServiceResource;
 use App\Filament\Resources\Handbooks\HandbookResource;
 use App\Filament\Resources\InductionPrograms\InductionProgramResource;
 use App\Filament\Resources\KeyPerformanceIndicators\KeyPerformanceIndicatorResource;
+use App\Filament\Resources\StaffConfidentialityContracts\Schemas\StaffConfidentialityContractForm;
+use App\Filament\Resources\StaffConfidentialityContracts\StaffConfidentialityContractResource;
 use App\Filament\Resources\Users\UserResource;
 use App\Filament\Resources\WarningLetters\WarningLetterResource;
 use App\Livewire\Resource;
@@ -42,7 +44,7 @@ class HumanResource extends Page
     static function getResources()
     {
         return [
-            Resource::make(["classes" => [UserResource::class, EndServiceResource::class, WarningLetterResource::class, DisputeManagementResource::class, KeyPerformanceIndicatorResource::class, InductionProgramResource::class, HandbookResource::class, EmployeeSalaryResource::class]]),
+            Resource::make(["classes" => [UserResource::class, EndServiceResource::class, WarningLetterResource::class, DisputeManagementResource::class, KeyPerformanceIndicatorResource::class, InductionProgramResource::class, HandbookResource::class, EmployeeSalaryResource::class, StaffConfidentialityContractResource::class]]),
         ];
     }
 }
