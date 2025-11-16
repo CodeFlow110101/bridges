@@ -6,6 +6,7 @@ use App\Filament\Resources\Enquiries\EnquiryResource;
 use App\Filament\Resources\Interventions\InterventionResource;
 use App\Filament\Resources\Invoices\InvoiceResource;
 use App\Filament\Resources\LongTermClients\LongTermClientResource;
+use App\Filament\Resources\MouMoas\MouMoaResource;
 use App\Livewire\Resource;
 use Filament\Pages\Page;
 use Illuminate\Support\Str;
@@ -28,7 +29,7 @@ class Administration extends Page
     static function getResources()
     {
         return [
-            Resource::make(["classes" => [InterventionResource::class, EnquiryResource::class, LongTermClientResource::class, InvoiceResource::class]]),
+            Resource::make(["classes" => [InterventionResource::class, EnquiryResource::class, LongTermClientResource::class, InvoiceResource::class, MouMoaResource::class]]),
         ];
     }
 }
