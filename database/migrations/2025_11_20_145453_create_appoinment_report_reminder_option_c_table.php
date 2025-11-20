@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('appoinment_report_reminder_option_c', function (Blueprint $table) {
+            $table->id();
+            $table->integer("appoinment_report_reminder_id");
+            $table->time("start_time");
+            $table->time("end_time");
+            $table->boolean("therapist_name_1")->default(false);
+            $table->boolean("therapist_name_2")->default(false);
+            $table->boolean("therapist_name_3")->default(false);
+            $table->boolean("therapist_name_4")->default(false);
+            $table->boolean("therapist_name_5")->default(false);
+            $table->boolean("therapist_name_6")->default(false);
+            $table->boolean("therapist_name_7")->default(false);
+            $table->boolean("therapist_name_8")->default(false);
+            $table->boolean("therapist_name_9")->default(false);
+            $table->boolean("therapist_name_10")->default(false);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('appoinment_report_reminder_option_c');
+    }
+};

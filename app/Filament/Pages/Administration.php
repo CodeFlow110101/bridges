@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Resources\AppoinmentReportReminders\AppoinmentReportReminderResource;
 use App\Filament\Resources\Enquiries\EnquiryResource;
 use App\Filament\Resources\Interventions\InterventionResource;
 use App\Filament\Resources\Invoices\InvoiceResource;
@@ -29,7 +30,7 @@ class Administration extends Page
     static function getResources()
     {
         return [
-            Resource::make(["classes" => [InterventionResource::class, EnquiryResource::class, LongTermClientResource::class, InvoiceResource::class, MouMoaResource::class]]),
+            Resource::make(["classes" => [InterventionResource::class, EnquiryResource::class, LongTermClientResource::class, InvoiceResource::class, MouMoaResource::class, AppoinmentReportReminderResource::class]]),
         ];
     }
 }
