@@ -11,6 +11,15 @@ class EditClinicalAssessment extends EditRecord
 {
     protected static string $resource = ClinicalAssessmentResource::class;
 
+    function getBreadcrumbs(): array
+    {
+        return [
+            self::$resource::$parentPage::getUrl() => self::$resource::$parentPage::getHeadingForPages(),
+            ...$this->getResourceBreadcrumbs(),
+            $this->getBreadcrumb(),
+        ];
+    }
+
     protected function getHeaderActions(): array
     {
         return [

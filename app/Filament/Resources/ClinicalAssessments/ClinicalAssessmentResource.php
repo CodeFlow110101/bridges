@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ClinicalAssessments;
 
+use App\Filament\Pages\Clinical;
 use App\Filament\Resources\ClinicalAssessments\Pages\CreateClinicalAssessment;
 use App\Filament\Resources\ClinicalAssessments\Pages\EditClinicalAssessment;
 use App\Filament\Resources\ClinicalAssessments\Pages\ListClinicalAssessments;
@@ -21,6 +22,10 @@ class ClinicalAssessmentResource extends Resource
     protected static ?string $model = ClinicalAssessment::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static bool $shouldRegisterNavigation = false;
+
+    public static ?string $parentPage = Clinical::class;
 
     public static function form(Schema $schema): Schema
     {

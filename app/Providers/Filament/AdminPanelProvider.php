@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Administration;
+use App\Filament\Pages\Clinical;
 use App\Filament\Pages\HumanResource;
 use App\Filament\Pages\Staff;
 use App\Filament\Resources\DisputeManagement\DisputeManagementResource;
@@ -133,6 +134,21 @@ class AdminPanelProvider extends PanelProvider
                                     return collect($page)->first()::getNavigationItemActiveRoutePattern();
                                 })->values();
                             })->flatten()->push("filament.admin.pages.staff");
+
+                        return collect($routes)->contains(fn($route) => request()->routeIs($route));
+                    }),
+                NavigationItem::make('Clinical Assessment')
+                    ->label(fn(): string => Clinical::getNavigationLabel())
+                    ->url(fn(): string => Clinical::getUrl())
+                    ->isActiveWhen(function () {
+                        $routes = collect(Clinical::getResources())
+                            ->map(fn($resource) => collect($resource)->last()['classes'])
+                            ->pipe(fn($resources) => collect(collect($resources)->first()))
+                            ->map(function ($resource) {
+                                return collect($resource::getPages())->map(function ($page) {
+                                    return collect($page)->first()::getNavigationItemActiveRoutePattern();
+                                })->values();
+                            })->flatten()->push("filament.admin.pages.clinical");
 
                         return collect($routes)->contains(fn($route) => request()->routeIs($route));
                     }),
