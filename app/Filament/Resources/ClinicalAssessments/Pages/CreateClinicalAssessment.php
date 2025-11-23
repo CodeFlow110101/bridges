@@ -8,13 +8,4 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateClinicalAssessment extends CreateRecord
 {
     protected static string $resource = ClinicalAssessmentResource::class;
-
-    function getBreadcrumbs(): array
-    {
-        return [
-            self::$resource::$parentPage::getUrl() => self::$resource::$parentPage::getHeadingForPages(),
-            ...$this->getResourceBreadcrumbs(),
-            $this->getBreadcrumb(),
-        ];
-    }
 }
