@@ -27,8 +27,6 @@ class ConsentFormBResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Form B';
 
-    protected static ?string $recordTitleAttribute = 'yes';
-
     public static function form(Schema $schema): Schema
     {
         return ConsentFormBForm::configure($schema);
