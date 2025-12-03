@@ -21,7 +21,7 @@ class InterventionPolicy
      */
     public function view(User $user, Intervention $intervention): bool
     {
-        return false;
+        return true;
     }
 
     /**

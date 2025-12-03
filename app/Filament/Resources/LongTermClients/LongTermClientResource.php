@@ -54,7 +54,7 @@ class LongTermClientResource extends Resource
         return [
             'index' => ListLongTermClients::route('/'),
             'create' => CreateLongTermClient::route('/create'),
-            // 'view' => ViewLongTermClient::route('/{record}'),
+            'view' => ViewLongTermClient::route('/{record}'),
             'edit' => EditLongTermClient::route('/{record}/edit'),
         ];
     }

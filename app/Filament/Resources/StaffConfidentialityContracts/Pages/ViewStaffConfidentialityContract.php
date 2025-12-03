@@ -14,6 +14,21 @@ class ViewStaffConfidentialityContract extends ViewRecord
     {
         return [
             EditAction::make(),
+            Action::make('Download')
+                ->action(function () {
+                    $record = $this->record;
+                    $pdf = Pdf::loadView('exports.pdf.appoinmentreportreminder', [
+                        'record' => $record,
+                    ]);
+
+                    $fileName = 'appoinmentreportreminder.pdf';
+
+                    $path = public_path($fileName);
+
+                    $pdf->save($path);
+
+                    return response()->download($path)->deleteFileAfterSend(true);
+                })
         ];
     }
 

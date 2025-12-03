@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\EndServices\Pages;
 
 use App\Filament\Resources\EndServices\EndServiceResource;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
@@ -14,6 +16,21 @@ class ViewEndService extends ViewRecord
     {
         return [
             EditAction::make(),
+            Action::make('Download')
+                ->action(function () {
+                    $record = $this->record;
+                    $pdf = Pdf::loadView('exports.pdf.endservice', [
+                        'record' => $record,
+                    ]);
+
+                    $fileName = 'endservice.pdf';
+
+                    $path = public_path($fileName);
+
+                    $pdf->save($path);
+
+                    return response()->download($path)->deleteFileAfterSend(true);
+                })
         ];
     }
 
