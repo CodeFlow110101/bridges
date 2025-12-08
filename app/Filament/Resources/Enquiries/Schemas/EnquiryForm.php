@@ -22,7 +22,7 @@ class EnquiryForm
     {
         return $schema
             ->components([
-                TextInput::make('inquiry_number')->required(),
+                TextInput::make('inquiry_number')->hiddenOn("create")->readOnly()->label('Inquiry Number'),
                 DatePicker::make('date')
                     ->native(false),
                 TextInput::make('name'),
@@ -37,7 +37,7 @@ class EnquiryForm
                 TextInput::make('school'),
                 Radio::make('is_insurance_covered')
                     ->inline()
-                    ->live() // or ->reactive() if using older Filament
+                    ->live()
                     ->default(0)
                     ->options([
                         0 => 'Yes',
