@@ -16,6 +16,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class MouMoaResource extends Resource
 {
@@ -25,11 +26,7 @@ class MouMoaResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Mou / Moa';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
-    protected static bool $shouldRegisterNavigation = false;
-
-    public static ?string $parentPage = Administration::class;
+    protected static string | UnitEnum | null $navigationGroup = 'Accounts';
 
     public static function form(Schema $schema): Schema
     {

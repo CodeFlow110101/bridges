@@ -11,6 +11,8 @@ use Filament\Schemas\Components\Grid;
 class Dashboard extends BaseDashboard
 {
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public function getColumns(): int | array
     {
         return ["sm" => 2, "max-sm" => 1];

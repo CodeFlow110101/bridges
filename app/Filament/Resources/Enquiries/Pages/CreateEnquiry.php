@@ -10,15 +10,6 @@ class CreateEnquiry extends CreateRecord
 {
     protected static string $resource = EnquiryResource::class;
 
-    function getBreadcrumbs(): array
-    {
-        return [
-            self::$resource::$parentPage::getUrl() => self::$resource::$parentPage::getHeadingForPages(),
-            ...$this->getResourceBreadcrumbs(),
-            $this->getBreadcrumb(),
-        ];
-    }
-
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         // Generate unique numeric inquiry number

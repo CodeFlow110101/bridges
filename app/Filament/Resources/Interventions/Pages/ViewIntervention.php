@@ -12,15 +12,6 @@ class ViewIntervention extends ViewRecord
 {
     protected static string $resource = InterventionResource::class;
 
-    function getBreadcrumbs(): array
-    {
-        return [
-            self::$resource::$parentPage::getUrl() => self::$resource::$parentPage::getHeadingForPages(),
-            ...$this->getResourceBreadcrumbs(),
-            $this->getBreadcrumb(),
-        ];
-    }
-
     protected function getHeaderActions(): array
     {
         return [

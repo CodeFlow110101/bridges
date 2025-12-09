@@ -31,7 +31,7 @@ class Administration extends Page
     static function getResources()
     {
         return [
-            Resource::make(["classes" => [InterventionResource::class, EnquiryResource::class, LongTermClientResource::class, InvoiceResource::class, MouMoaResource::class, AppoinmentReportReminderResource::class, StaffEnrollmentTrainingResource::class]]),
+            Resource::make(["classes" => []]),
         ];
     }
 }

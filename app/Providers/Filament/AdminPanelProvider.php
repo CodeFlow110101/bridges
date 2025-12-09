@@ -6,6 +6,7 @@ use App\Filament\Pages\Administration;
 use App\Filament\Pages\Clinical;
 use App\Filament\Pages\HumanResource;
 use App\Filament\Pages\Staff;
+use App\Filament\Pages\Supervisor;
 use App\Filament\Resources\DisputeManagement\DisputeManagementResource;
 use App\Filament\Resources\EndServices\EndServiceResource;
 use App\Filament\Resources\Handbooks\HandbookResource;
@@ -85,10 +86,16 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->spa()
             ->navigationGroups([
-                NavigationGroup::make()
-                    ->label('Clinical Management')
+                NavigationGroup::make("Admin")->icon('heroicon-o-home'),
+                NavigationGroup::make("Accounts")->icon('heroicon-o-window'),
+                NavigationGroup::make("Clinical Management")->icon('heroicon-o-table-cells'),
+                NavigationGroup::make("Clinical")->icon('heroicon-o-lock-open'),
+                NavigationGroup::make("Consent")->icon('heroicon-o-cube'),
+                NavigationGroup::make("Supervisor")->icon('heroicon-o-table-cells'),
             ])
             ->navigationItems([
+                NavigationItem::make('Admin')->group('Admin'),
+                NavigationItem::make('Accounts')->group('Accounts'),
                 NavigationItem::make('Administration')
                     ->label(fn(): string => Administration::getNavigationLabel())
                     ->url(fn(): string => Administration::getUrl())
@@ -137,6 +144,10 @@ class AdminPanelProvider extends PanelProvider
 
                         return collect($routes)->contains(fn($route) => request()->routeIs($route));
                     }),
+                NavigationItem::make('Supervisor')
+                    ->label(fn(): string => Supervisor::getNavigationLabel())
+                    ->url(fn(): string => Supervisor::getUrl())
+                    ->group('Supervisor')
             ]);
     }
 }

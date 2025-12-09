@@ -33,13 +33,4 @@ class ViewEnquiry extends ViewRecord
                 }),
         ];
     }
-
-    function getBreadcrumbs(): array
-    {
-        return [
-            self::$resource::$parentPage::getUrl() => self::$resource::$parentPage::getHeadingForPages(),
-            ...$this->getResourceBreadcrumbs(),
-            $this->getBreadcrumb(),
-        ];
-    }
 }
