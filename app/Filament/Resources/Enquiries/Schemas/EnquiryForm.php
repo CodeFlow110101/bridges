@@ -23,10 +23,10 @@ class EnquiryForm
         return $schema
             ->components([
                 TextInput::make('inquiry_number')->hiddenOn("create")->readOnly()->label('Inquiry Number'),
-                DatePicker::make('date')
-                    ->native(false),
-                TextInput::make('name'),
+                DatePicker::make('date')->hiddenOn("create")->readOnly(),
+                TextInput::make('name')->required(),
                 TextInput::make('phone_no')
+                    ->required()
                     ->label("Phone No (In Dubai)")
                     ->rule('digits:9')
                     ->mask("999999999")
@@ -49,6 +49,7 @@ class EnquiryForm
                     ->columnSpanFull()
                     ->label('Insurance Name'),
                 Radio::make('referral_source')
+                    ->required()
                     ->options(Enquiry::referralSourceOptions())->live()->inline()->columnSpanFull(),
                 TextInput::make('referral_source_name')
                     ->columnSpanFull()
@@ -76,12 +77,13 @@ class EnquiryForm
 
                 Section::make("Details discussed with the client")
                     ->schema([
-                        TextInput::make('cost_of_service')->label("Cost of service mentioned"),
+                        TextInput::make('cost_of_service')->label("Cost of service mentioned")->required(),
                         Toggle::make('is_report_provided')
                             ->label("I Have you mentioned that: In consultation, report is not provided. If required consultant will suggest going for assessment")
                             ->inline(false)
                             ->required(),
                         Textarea::make('other_info')
+                            ->required()
                             ->label("Other Information")
                             ->columnSpanFull(),
                         Toggle::make('is_client_satisfied')
@@ -101,10 +103,11 @@ class EnquiryForm
                         Toggle::make('is_appoinment_booked')
                             ->required()
                             ->live(),
-                        DateTimePicker::make('appoinment_date_and_time')->native(false)->hidden(fn(Get $get): bool => !$get('is_appoinment_booked')),
-                        TextInput::make('supervisor_name')->hidden(fn(Get $get): bool => !$get('is_appoinment_booked')),
+                        DateTimePicker::make('appoinment_date_and_time')->native(false)->hidden(fn(Get $get): bool => !$get('is_appoinment_booked'))->requiredIfAccepted('is_appoinment_booked'),
+                        TextInput::make('supervisor_name')->hidden(fn(Get $get): bool => !$get('is_appoinment_booked'))->requiredIfAccepted('is_appoinment_booked'),
                         Textarea::make('details_when_appoinment_not_booked')
                             ->hidden(fn(Get $get): bool => $get('is_appoinment_booked'))
+                            ->requiredIf('is_appoinment_booked', false)
                             ->columnSpanFull(),
                     ])->columnSpanFull(),
                 Section::make("Has Client attended Session?")
@@ -116,6 +119,7 @@ class EnquiryForm
                         TextInput::make('session_supervisor_name')->hidden(fn(Get $get): bool => !$get('has_scheduled_session')),
                         Textarea::make('details_when_session_not_scheduled')
                             ->hidden(fn(Get $get): bool => $get('has_scheduled_session'))
+                            ->requiredIf('has_scheduled_session', false)
                             ->columnSpanFull(),
                     ])->columnSpanFull(),
             ]);

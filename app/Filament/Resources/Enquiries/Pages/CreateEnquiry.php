@@ -12,8 +12,8 @@ class CreateEnquiry extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        // Generate unique numeric inquiry number
         $data['inquiry_number'] = $this->generateUniqueInquiryNumber();
+        $data['date'] = now();
 
         return $data;
     }
