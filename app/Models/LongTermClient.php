@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LongTermClient extends Model
 {
     protected $table = "long_term_clients";
 
     protected $fillable = [
-        'enquiry_number',
+        'inquiry_id',
         'client_name',
         'client_letter_of_discount',
         'reply_from_clinical_manager',
@@ -23,4 +24,9 @@ class LongTermClient extends Model
         'contract_no_of_months',
         'alert_to_generate_on',
     ];
+
+    public function enquiry(): BelongsTo
+    {
+        return $this->belongsTo(Enquiry::class, "inquiry_id", "id");
+    }
 }

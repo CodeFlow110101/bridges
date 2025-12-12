@@ -7,6 +7,7 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -21,8 +22,13 @@ class InterventionForm
     {
         return $schema
             ->components([
-                TextInput::make('inquiry_number')
-                    ->required(),
+                Select::make('inquiry_id')
+                    ->label("Inquiry Number")
+                    ->native(false)
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number'),
                 DatePicker::make('date')
                     ->native(false)
                     ->required(),
@@ -82,8 +88,7 @@ class InterventionForm
                             ->live()
                             ->default(false),
                         Textarea::make('caregiver_relevant_info')
-                            ->columnSpanFull()->hidden(fn(Get $get): bool => !$get('has_caregiver_relevant_info')),
-
+                            ->columnSpanFull()->hidden(fn(Get $get): bool => $get('has_caregiver_relevant_info')),
                         Toggle::make('is_first_therapy')
                             ->label("Has client attended first therapy session? ")
                             ->required()
@@ -93,7 +98,7 @@ class InterventionForm
                             ->inline()
                             ->label(new HtmlString("<div></div>"))
                             ->options(Intervention::notFirstTherapyOptions())->columnSpanFull()
-                            ->hidden(fn(Get $get): bool => !$get('is_first_therapy'))
+                            ->hidden(fn(Get $get): bool => $get('is_first_therapy'))
                             ->live(),
                         Textarea::make('if_not_other_first_therapy_description')
                             ->columnSpanFull()

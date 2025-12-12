@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Intervention extends Model
 {
     protected $table = "interventions";
 
     protected $fillable = [
-        'inquiry_number',
+        'inquiry_id',
         'date',
         'name',
         'referral_source',
@@ -40,6 +41,11 @@ class Intervention extends Model
         'schedule_date_time',
         'schedule_supervisor_name',
     ];
+
+    public function enquiry(): BelongsTo
+    {
+        return $this->belongsTo(Enquiry::class, "inquiry_id", "id");
+    }
 
     public static function mslOptions1()
     {

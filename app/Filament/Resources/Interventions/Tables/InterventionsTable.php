@@ -17,7 +17,8 @@ class InterventionsTable
     {
         return $table
             ->columns([
-                TextColumn::make('inquiry_number')
+                TextColumn::make('Enquiry.inquiry_number')
+                    ->label('Inquiry Number')
                     ->searchable(),
                 TextColumn::make('date')
                     ->date(),

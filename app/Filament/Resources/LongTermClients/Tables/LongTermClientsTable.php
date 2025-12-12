@@ -16,7 +16,8 @@ class LongTermClientsTable
     {
         return $table
             ->columns([
-                TextColumn::make('enquiry_number')
+                TextColumn::make('Enquiry.inquiry_number')
+                    ->label('Inquiry Number')
                     ->searchable(),
                 TextColumn::make('client_name')
                     ->searchable(),

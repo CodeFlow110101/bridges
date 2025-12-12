@@ -4,6 +4,7 @@ namespace App\Filament\Resources\LongTermClients\Schemas;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
@@ -14,9 +15,13 @@ class LongTermClientForm
     {
         return $schema
             ->components([
-                TextInput::make('enquiry_number')
-                    ->label("Client Enquiry Cheque Number")
-                    ->required(),
+                Select::make('inquiry_id')
+                    ->label("Inquiry Number")
+                    ->native(false)
+                    ->searchable()
+                    ->required()
+                    ->preload()
+                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number'),
                 TextInput::make('client_name')
                     ->required(),
                 FileUpload::make('client_letter_of_discount')->directory('files')->label("Upload Client's letter of discount"),
