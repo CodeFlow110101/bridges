@@ -10,6 +10,7 @@ class Invoice extends Model
     protected $table = "invoices";
 
     protected $fillable = [
+        'inquiry_id',
         'date_and_time',
         'client_name',
         'client_id',
@@ -27,6 +28,11 @@ class Invoice extends Model
         'skiply',
         'comment',
     ];
+
+    public function enquiry(): BelongsTo
+    {
+        return $this->belongsTo(Enquiry::class, "inquiry_id", "id");
+    }
 
     public function department(): BelongsTo
     {

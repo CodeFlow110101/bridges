@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class AppoinmentReportReminder extends Model
@@ -23,7 +24,7 @@ class AppoinmentReportReminder extends Model
         'option_b_time_session_booked',
         'option_b_department',
         'option_c_date',
-        'inquiry_number',
+        'enquiry_id',
         'consent_to',
         'consent_to_insurance_name',
         'form_a_consent_to_school',
@@ -41,6 +42,11 @@ class AppoinmentReportReminder extends Model
         'form_h_consent_to_enrolment',
         'form_h_consent_to_enrolment_insurance_name',
     ];
+
+    public function enquiry(): BelongsTo
+    {
+        return $this->belongsTo(Enquiry::class, "inquiry_id", "id");
+    }
 
     public function optionc(): HasMany
     {

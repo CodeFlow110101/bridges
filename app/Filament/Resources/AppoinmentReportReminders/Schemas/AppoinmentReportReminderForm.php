@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\AppoinmentReportReminders\Schemas;
 
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Repeater\TableColumn;
@@ -19,11 +20,19 @@ class AppoinmentReportReminderForm
     {
         return $schema
             ->components([
+                Select::make('inquiry_id')
+                    ->label("Inquiry Number")
+                    ->native(false)
+                    ->searchable()
+                    ->required()
+                    ->preload()
+                    ->columnSpanFull()
+                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number'),
                 Section::make("For Assesment")
                     ->schema([
                         TextInput::make('client_name')
                             ->required(),
-                        DatePicker::make('date_and_time')->native(false),
+                        DateTimePicker::make('date_and_time')->native(false),
                         TextInput::make('phone_no_dubai')
                             ->label("Current Phone (in Dubai)")
                             ->tel(),
@@ -45,7 +54,7 @@ class AppoinmentReportReminderForm
                     ])->columnSpanFull(),
                 Section::make("Option A")
                     ->schema([
-                        DatePicker::make('option_a_date_time')->native(false),
+                        DateTimePicker::make('option_a_date_time')->native(false),
                         TextInput::make('option_a_phone_no_dubai')
                             ->tel(),
                     ])->columnSpanFull(),
@@ -53,7 +62,7 @@ class AppoinmentReportReminderForm
                     ->schema([
                         TextInput::make('option_b_multiple_days_intervention')
                             ->numeric(),
-                        DatePicker::make('option_b_therapist_date_time')->native(false),
+                        DateTimePicker::make('option_b_therapist_date_time')->native(false),
                         TextInput::make('option_b_time_session_booked')
                             ->numeric(),
                         TextInput::make('option_b_department')
@@ -122,7 +131,6 @@ class AppoinmentReportReminderForm
                         ])
                         ->extraAttributes(["class" => "overflow-x-auto px-0.5 pb-4"])
                 ])->columnSpanFull(),
-                TextInput::make('inquiry_number')->columnSpanFull(),
                 Section::make()
                     ->schema([
                         Radio::make('consent_to')

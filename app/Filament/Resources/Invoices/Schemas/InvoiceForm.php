@@ -15,6 +15,13 @@ class InvoiceForm
     {
         return $schema
             ->components([
+                Select::make('inquiry_id')
+                    ->label("Inquiry Number")
+                    ->native(false)
+                    ->searchable()
+                    ->required()
+                    ->preload()
+                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number'),
                 DateTimePicker::make('date_and_time')
                     ->native(false)
                     ->required(),
@@ -22,7 +29,7 @@ class InvoiceForm
                     ->required(),
                 TextInput::make('client_id')
                     ->required(),
-                TextInput::make('invoice_number'),
+                TextInput::make('invoice_number')->hiddenOn("create")->readOnly(),
                 Select::make('department_id')
                     ->required()
                     ->relationship(name: 'department', titleAttribute: 'name')->native(false),

@@ -16,7 +16,8 @@ class InvoiceInfolist
                 TextEntry::make('client_name'),
                 TextEntry::make('client_id'),
                 TextEntry::make('invoice_number'),
-                TextEntry::make('department_id')
+                TextEntry::make('department.name')
+                    ->label("department")
                     ->numeric(),
                 TextEntry::make('no_of_sessions'),
                 TextEntry::make('service')
