@@ -77,9 +77,9 @@ class EnquiryForm
 
                 Section::make("Details discussed with the client")
                     ->schema([
-                        TextInput::make('cost_of_service')->label("Cost of service mentioned")->required(),
+                        TextInput::make('cost_of_service')->label("Cost of service per session")->mask('99999999')->required(),
                         Toggle::make('is_report_provided')
-                            ->label("I Have you mentioned that: In consultation, report is not provided. If required consultant will suggest going for assessment")
+                            ->label("I Have mentioned that: In consultation, report is not provided. If required consultant will suggest going for assessment")
                             ->inline(false)
                             ->required(),
                         Textarea::make('other_info')

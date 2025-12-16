@@ -34,8 +34,8 @@ class LongTermClientForm
                 Textarea::make('conditions_discovered')->label("Brief on conditions discussed")
                     ->columnSpanFull(),
                 TextInput::make('cheque_no')->label("cheque_number"),
-                TextInput::make('cost_on_cheque')->label("Cost mentioned on cheque"),
-                TextInput::make('contract_no_of_months')->label("Number of months contract"),
+                TextInput::make('cost_on_cheque')->label("Cost mentioned on cheque")->mask('99999999'),
+                TextInput::make('contract_no_of_months')->label("Number of months contract")->mask('99999999'),
                 TextInput::make('alert_to_generate_on')->label("Alert to generate on"),
             ]);
     }

@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Holiday extends Model
 {
     protected $table = "holidays";
 
     protected $fillable = [
-        'inquiry_number',
+        'inquiry_id',
         'name',
         'date_of_birth',
         'mother_msl',
@@ -27,6 +28,11 @@ class Holiday extends Model
         'cheat_sheet',
         'date_of_upload',
     ];
+
+    public function enquiry(): BelongsTo
+    {
+        return $this->belongsTo(Enquiry::class, "inquiry_id", "id");
+    }
 
     public static function mslOptions()
     {

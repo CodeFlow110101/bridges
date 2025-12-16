@@ -34,6 +34,7 @@ class AppoinmentReportReminderForm
                             ->required(),
                         DateTimePicker::make('date_and_time')->native(false),
                         TextInput::make('phone_no_dubai')
+                            ->mask('99999999')
                             ->label("Current Phone (in Dubai)")
                             ->tel(),
                         Radio::make('phase')

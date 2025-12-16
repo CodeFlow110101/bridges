@@ -35,11 +35,11 @@ class InvoiceForm
                     ->relationship(name: 'department', titleAttribute: 'name')->native(false),
                 Textarea::make('other')
                     ->columnSpanFull(),
-                TextInput::make('no_of_sessions'),
+                TextInput::make('no_of_sessions')->mask('99999999'),
                 Select::make('service')
                     ->native(false)
                     ->options(["none"]),
-                TextInput::make('amount'),
+                TextInput::make('amount')->mask('99999999'),
                 Select::make('method')
                     ->native(false)
                     ->options(["none"]),

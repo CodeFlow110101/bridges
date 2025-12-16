@@ -30,4 +30,16 @@ class CreateEnquiry extends CreateRecord
 
         return $inquiryNumber;
     }
+
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getCreateFormAction(),
+            $this->getCreateAnotherFormAction()->label("Save & Create Another"),
+            $this->getCancelFormAction(),
+        ];
+    }
+
+    // $this->getCreateFormAction()
+    //         ->formId('form'),
 }

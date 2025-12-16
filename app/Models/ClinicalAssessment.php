@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ClinicalAssessment extends Model
 {
     protected $table = "clinical_assessments";
 
     protected $fillable = [
-        'inquiry_number',
+        'inquiry_id',
         'name',
         'date',
         'referral_source',
@@ -31,6 +32,10 @@ class ClinicalAssessment extends Model
         'future_reference',
     ];
 
+    public function enquiry(): BelongsTo
+    {
+        return $this->belongsTo(Enquiry::class, "inquiry_id", "id");
+    }
 
     public static function mslOptions()
     {

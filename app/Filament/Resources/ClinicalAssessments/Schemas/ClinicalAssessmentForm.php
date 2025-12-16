@@ -6,6 +6,7 @@ use App\Models\ClinicalAssessment;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -19,7 +20,14 @@ class ClinicalAssessmentForm
     {
         return $schema
             ->components([
-                TextInput::make('inquiry_number'),
+                Select::make('inquiry_id')
+                    ->label("Inquiry Number")
+                    ->native(false)
+                    ->searchable()
+                    ->required()
+                    ->preload()
+                    ->columnSpanFull()
+                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number'),
                 TextInput::make('name'),
                 DatePicker::make("date")->native(false),
                 TextInput::make('referral_source'),

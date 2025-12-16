@@ -34,11 +34,16 @@ class MouMoaForm
                 Section::make('Cost and Time duration')
                     ->description('Cost of assessment as per amendment')
                     ->schema([
-                        TextInput::make('speech_therapy_cost'),
-                        TextInput::make('occupational_therapy_cost'),
-                        TextInput::make('behavioural_therapy_cost'),
-                        TextInput::make('psychoeducational_assessment_cost'),
-                        TextInput::make('physiotherapy_cost'),
+                        TextInput::make('speech_therapy_cost')
+                            ->mask('99999999'),
+                        TextInput::make('occupational_therapy_cost')
+                            ->mask('99999999'),
+                        TextInput::make('behavioural_therapy_cost')
+                            ->mask('99999999'),
+                        TextInput::make('psychoeducational_assessment_cost')
+                            ->mask('99999999'),
+                        TextInput::make('physiotherapy_cost')
+                            ->mask('99999999'),
                     ])->columnSpanFull(),
                 Repeater::make('cost_of_therapy_in_clinic')
                     ->label("Cost of Therapy as per amendment (in Clinic)")
@@ -68,7 +73,8 @@ class MouMoaForm
                     ->schema([
                         TextInput::make('location')
                             ->readOnly(),
-                        TextInput::make('cost'),
+                        TextInput::make('cost')
+                            ->mask('99999999'),
                         TimePicker::make('time')
                             ->native(false)
                             ->prefixIconColor('success'),
@@ -105,7 +111,8 @@ class MouMoaForm
                     ->schema([
                         TextInput::make('location')
                             ->readOnly(),
-                        TextInput::make('cost'),
+                        TextInput::make('cost')
+                            ->mask('99999999'),
                         TimePicker::make('time')
                             ->native(false)
                             ->prefixIconColor('success'),
