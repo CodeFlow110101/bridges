@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\AppoinmentReportReminders\Schemas;
 
+use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Radio;
@@ -11,6 +13,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -73,43 +76,24 @@ class AppoinmentReportReminderForm
                     ->schema([
                         DatePicker::make('option_c_date')->native(false),
                         Repeater::make('optionc')
-                            ->table([
-                                TableColumn::make('Start Time'),
-                                TableColumn::make('End Time'),
-                                TableColumn::make('Therapist Name 1'),
-                                TableColumn::make('Therapist Name 2'),
-                                TableColumn::make('Therapist Name 3'),
-                                TableColumn::make('Therapist Name 4'),
-                                TableColumn::make('Therapist Name 5'),
-                                TableColumn::make('Therapist Name 6'),
-                                TableColumn::make('Therapist Name 7'),
-                                TableColumn::make('Therapist Name 8'),
-                                TableColumn::make('Therapist Name 9'),
-                                TableColumn::make('Therapist Name 10'),
-                            ])
                             ->relationship("optionc")
                             ->label("Option C")
+                            ->columns(2)
                             ->schema([
-                                TimePicker::make('start_time')->native(false),
-                                TimePicker::make('end_time')->native(false),
-                                Toggle::make('therapist_name_1'),
-                                Toggle::make('therapist_name_2'),
-                                Toggle::make('therapist_name_3'),
-                                Toggle::make('therapist_name_4'),
-                                Toggle::make('therapist_name_5'),
-                                Toggle::make('therapist_name_6'),
-                                Toggle::make('therapist_name_7'),
-                                Toggle::make('therapist_name_8'),
-                                Toggle::make('therapist_name_9'),
-                                Toggle::make('therapist_name_10'),
-                            ])->extraAttributes(["class" => "overflow-x-auto px-0.5 pb-4"])
+                                TimePicker::make('start_time')->native(false)->required(),
+                                TimePicker::make('end_time')->native(false)->required(),
+                                Repeater::make('therapists')
+                                    ->relationship()
+                                    ->simple(
+                                        TextInput::make('name')->required(),
+                                    )->columnSpanFull()->grid(3),
+                            ])
                     ])->columnSpanFull(),
                 Section::make("Option D")->schema([
                     Repeater::make('optiond')
                         ->table([
                             TableColumn::make('Start Time'),
                             TableColumn::make('End Time'),
-
                             TableColumn::make('Monday'),
                             TableColumn::make('Tuesday'),
                             TableColumn::make('Wednesday'),
@@ -120,9 +104,8 @@ class AppoinmentReportReminderForm
                         ->relationship("optiond")
                         ->label("Option ")
                         ->schema([
-                            TimePicker::make('start_time')->native(false),
-                            TimePicker::make('end_time')->native(false),
-
+                            TimePicker::make('start_time')->native(false)->required(),
+                            TimePicker::make('end_time')->native(false)->required(),
                             Toggle::make('monday'),
                             Toggle::make('tuesday'),
                             Toggle::make('wednesday'),

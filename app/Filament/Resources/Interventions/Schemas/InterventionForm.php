@@ -42,7 +42,6 @@ class InterventionForm
 
                 Section::make("Features of caregiver")
                     ->schema([
-
                         Section::make("Parent: Mother (MSL)")->schema([
                             Radio::make('mother_msl_1')
                                 ->label(new HtmlString("<div></div>"))

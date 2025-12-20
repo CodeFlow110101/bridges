@@ -24,7 +24,7 @@ class AppoinmentReportReminder extends Model
         'option_b_time_session_booked',
         'option_b_department',
         'option_c_date',
-        'enquiry_id',
+        'inquiry_id',
         'consent_to',
         'consent_to_insurance_name',
         'form_a_consent_to_school',

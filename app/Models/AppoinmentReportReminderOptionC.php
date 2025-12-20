@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class AppoinmentReportReminderOptionC extends Model
 {
@@ -24,4 +25,9 @@ class AppoinmentReportReminderOptionC extends Model
         'therapist_name_9',
         'therapist_name_10',
     ];
+
+    public function therapists(): HasMany
+    {
+        return $this->hasMany(AppoinmentReportReminderOptionCTherapist::class, 'option_c_id', 'id');
+    }
 }
