@@ -6,7 +6,6 @@ use App\Filament\Pages\Administration;
 use App\Filament\Pages\Clinical;
 use App\Filament\Pages\HumanResource;
 use App\Filament\Pages\Staff;
-use App\Filament\Pages\Supervisor;
 use App\Filament\Resources\DisputeManagement\DisputeManagementResource;
 use App\Filament\Resources\EndServices\EndServiceResource;
 use App\Filament\Resources\Handbooks\HandbookResource;
@@ -144,10 +143,6 @@ class AdminPanelProvider extends PanelProvider
 
                         return collect($routes)->contains(fn($route) => request()->routeIs($route));
                     }),
-                NavigationItem::make('Supervisor')
-                    ->label(fn(): string => Supervisor::getNavigationLabel())
-                    ->url(fn(): string => Supervisor::getUrl())
-                    ->group('Supervisor')
             ]);
     }
 }

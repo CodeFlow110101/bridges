@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MOM extends Model
 {
@@ -10,7 +11,7 @@ class MOM extends Model
     protected $table = "moms";
 
     protected $fillable = [
-        'inquiry_number',
+        'inquiry_id',
         'name',
         'date_of_birth',
         'session_date',
@@ -23,4 +24,9 @@ class MOM extends Model
         'email_from',
         'email_to',
     ];
+
+    public function enquiry(): BelongsTo
+    {
+        return $this->belongsTo(Enquiry::class, "inquiry_id", "id");
+    }
 }

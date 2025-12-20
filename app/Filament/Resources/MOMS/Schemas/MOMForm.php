@@ -4,6 +4,7 @@ namespace App\Filament\Resources\MOMS\Schemas;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
@@ -16,8 +17,14 @@ class MOMForm
     {
         return $schema
             ->components([
-                TextInput::make('inquiry_number')
-                    ->required(),
+                Select::make('inquiry_id')
+                    ->label("Inquiry Number")
+                    ->native(false)
+                    ->searchable()
+                    ->required()
+                    ->preload()
+                    ->columnSpanFull()
+                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number'),
                 TextInput::make('name')
                     ->required(),
                 DatePicker::make('date_of_birth')->native(false),

@@ -21,6 +21,8 @@ class ClientInterventionResource extends Resource
 {
     protected static ?string $model = ClientIntervention::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string | UnitEnum | null $navigationGroup = 'Clinical';
 
     public static function form(Schema $schema): Schema

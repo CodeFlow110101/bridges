@@ -21,6 +21,8 @@ class HolidayResource extends Resource
 {
     protected static ?string $model = Holiday::class;
 
+    protected static ?string $modelLabel = 'Cheat sheet';
+
     protected static string | UnitEnum | null $navigationGroup = 'Clinical';
 
     public static function form(Schema $schema): Schema
