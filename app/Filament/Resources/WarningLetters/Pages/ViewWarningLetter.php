@@ -3,10 +3,13 @@
 namespace App\Filament\Resources\WarningLetters\Pages;
 
 use App\Filament\Resources\WarningLetters\WarningLetterResource;
+use App\Mail\WarningLetter;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
+use Illuminate\Support\Facades\Mail;
 
 class ViewWarningLetter extends ViewRecord
 {
@@ -30,6 +33,15 @@ class ViewWarningLetter extends ViewRecord
                     $pdf->save($path);
 
                     return response()->download($path)->deleteFileAfterSend(true);
+                }),
+            Action::make('Send Mail')
+                ->action(function () {
+                    Mail::to($this->record->user->email)->send(new WarningLetter($this->record));
+
+                    Notification::make()
+                        ->title('Sent successfully')
+                        ->success()
+                        ->send();
                 })
         ];
     }

@@ -23,9 +23,7 @@ class ConsentFormGResource extends Resource
 
     protected static string | UnitEnum | null $navigationGroup = 'Consent';
 
-    protected static ?string $modelLabel = 'Form G';
-
-    protected static ?string $pluralModelLabel = 'Form G';
+    protected static ?string $modelLabel = 'Form G Therapy Plan Approval';
 
     public static function form(Schema $schema): Schema
     {

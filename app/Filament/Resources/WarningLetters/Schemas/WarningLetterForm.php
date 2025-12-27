@@ -10,6 +10,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +24,13 @@ class WarningLetterForm
                     ->relationship(name: 'user')
                     ->native(false)
                     ->required()
-                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name}"),
+                    ->live()
+                    ->columnSpanFull()
+                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name} ({$record->staff_id}) (Dept: {$record->department?->name})")
+                    ->afterStateUpdated(function (?string $state, ?string $old, Set $set) {
+                        $user = User::find($state);
+                        $set('name', $user?->full_name);
+                    }),
                 DatePicker::make("date_of_issue")->native(false)->required(),
                 Section::make("Questions")->schema([
                     Textarea::make('brief_description_of_the_issue_concern'),
