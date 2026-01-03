@@ -31,7 +31,7 @@ class KeyPerformanceIndicatorForm
                     ->relationship(name: 'user')
                     ->native(false)
                     ->required()
-                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name}"),
+                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name} ({$record->staff_id}) (Dept: {$record->department?->name})"),
                 DatePicker::make('date')->native(false)->required(),
                 Radio::make('evaluation_period')
                     ->required()
@@ -130,7 +130,7 @@ class KeyPerformanceIndicatorForm
                             ->addActionLabel('Add Strength and Skills'),
                     ]),
                 Text::make('*Overall performance')->size(TextSize::Large),
-                Text::make('SCORE: Sum of A+B+C 0'),
+                Text::make('SCORE(Sum of A+B+C): <total of A +B+C>'),
                 Text::make('*Performance Scoring:')->size(TextSize::Large),
                 UnorderedList::make([
                     'O: Outstanding Performance - Conduct and performance consistently superior',

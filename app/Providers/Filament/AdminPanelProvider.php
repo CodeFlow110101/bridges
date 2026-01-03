@@ -83,6 +83,8 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::generateV3Palette("#2c4099"),
             ])
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('30s')
             ->spa()
             ->navigationGroups([
                 NavigationGroup::make("Admin")->icon('heroicon-o-home'),

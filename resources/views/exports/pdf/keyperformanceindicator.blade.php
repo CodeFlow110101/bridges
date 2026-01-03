@@ -167,23 +167,23 @@
             <tbody>
                 <tr>
                     <td>Employee</td>
-                    <td>{{ $record->employee_signature ?? '' }}</td>
+                    <td><img src="{{ $record->employee_signature ?? '' }}" alt="Employee Signature" style="max-width: 200px; max-height: 80px;"></td>
                 </tr>
                 <tr>
                     <td>HOD / Supervisor</td>
-                    <td>{{ $record->hod_supervisor_signature ?? '' }}</td>
+                    <td><img src="{{ $record->hod_supervisor_signature ?? '' }}" alt="HOD / Supervisor Signature" style="max-width: 200px; max-height: 80px;"></td>
                 </tr>
                 <tr>
                     <td>HR</td>
-                    <td>{{ $record->hrs_signature ?? '' }}</td>
+                    <td><img src="{{ $record->hrs_signature ?? '' }}" alt="HR Signature" style="max-width: 200px; max-height: 80px;"></td>
                 </tr>
                 <tr>
                     <td>Director</td>
-                    <td>{{ $record->directors_signature ?? '' }}</td>
+                    <td><img src="{{ $record->directors_signature ?? '' }}" alt="Director Signature" style="max-width: 200px; max-height: 80px;"></td>
                 </tr>
                 <tr>
                     <td>HOD / Supervisor (2nd)</td>
-                    <td>{{ $record->hod_supervisor_2nd_signature ?? '' }}</td>
+                    <td><img src="{{ $record->hod_supervisor_2nd_signature ?? '' }}" alt="HOD / Supervisor (2nd) Signature" style="max-width: 200px; max-height: 80px;"></td>
                 </tr>
             </tbody>
         </table>

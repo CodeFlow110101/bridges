@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources\DisputeManagement\Tables;
 
+use App\Filament\Exports\DisputeManagementExporter;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ExportAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -27,6 +29,10 @@ class DisputeManagementTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+            ])
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(DisputeManagementExporter::class),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
