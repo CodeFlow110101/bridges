@@ -24,6 +24,8 @@ class DepartmentSeeder extends Seeder
             "Clinic Manager",
             "Cleaning Staff",
             "Clinic (MS)",
+            "Supervisor/HOD",
+            "Director",
         ])->each(fn($name, $id) => Department::updateOrCreate(["id" => $id + 1], ["name" => $name]));
     }
 }

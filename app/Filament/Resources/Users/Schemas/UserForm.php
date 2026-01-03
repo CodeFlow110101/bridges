@@ -53,6 +53,10 @@ class UserForm
                 TextInput::make('email')->required(),
                 DatePicker::make('date_of_birth')->native(false)->maxDate(now()->subYears(18))->default(now()->subYears(18))->required(),
                 Select::make('department_id')->relationship('department', 'name')->required()->native(false),
+                TextInput::make('basic_salary')->numeric()->nullable(),
+                TextInput::make('hra')->numeric()->nullable(),
+                TextInput::make('other_allowances')->numeric()->nullable(),
+                TextInput::make('transportation')->numeric()->nullable(),
                 TextInput::make('password')->password()->revealable()->hiddenOn('edit')->confirmed(),
                 TextInput::make('password_confirmation')->password()->revealable()->hiddenOn('edit'),
                 Section::make('Day 1: Trainee will receive Induction program Sheet')

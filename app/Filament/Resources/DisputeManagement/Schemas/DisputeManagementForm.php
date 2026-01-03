@@ -20,7 +20,7 @@ class DisputeManagementForm
                     ->relationship(name: 'user')
                     ->native(false)
                     ->required()
-                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name}"),
+                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name} ({$record->staff_id}) (Dept: {$record->department?->name})"),
                 DatePicker::make('date')->native(false)->required(),
                 Textarea::make("concern"),
                 Grid::make()->schema([

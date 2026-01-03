@@ -42,6 +42,10 @@ class User extends Authenticatable implements HasName
         'introduction_to_toy_room_work_area',
         'introduction_to_resource_room',
         'introduction_to_training_area',
+        "basic_salary",
+        "hra",
+        "other_allowances",
+        "transportation",
     ];
 
     public function phonenos(): HasMany
