@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Resources\StaffEnrollmentTrainings\StaffEnrollmentTrainingResource;
 use App\Filament\Resources\TherapyRoomCleanlinesses\TherapyRoomCleanlinessResource;
 use Filament\Pages\Page;
 use Illuminate\Support\Str;
@@ -25,7 +26,7 @@ class Staff extends Page
     static function getResources()
     {
         return [
-            Resource::make(["classes" => [TherapyRoomCleanlinessResource::class]])
+            Resource::make(["classes" => [TherapyRoomCleanlinessResource::class, StaffEnrollmentTrainingResource::class]])
         ];
     }
 }

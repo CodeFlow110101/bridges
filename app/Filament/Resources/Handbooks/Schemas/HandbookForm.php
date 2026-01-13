@@ -26,13 +26,11 @@ class HandbookForm
                     ->relationship(name: 'user')
                     ->native(false)
                     ->required()
-                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name} ({$record->staff_id})")
-                    ->searchable()
-                    ->preload(),
+                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name} ({$record->staff_id}) (Dept: {$record->department?->name})"),
                 Text::make("(Document: A)")->size(TextSize::Large),
                 Section::make('Introduction')
                     ->schema([
-                        Text::make('This Employee Handbook contains information about the employment policies and practices of the ABC, here after referred to as the "BRIDGES". We expect each employee to read this Employee Handbook carefully, as it is a valuable reference for understanding your job and the "BRIDGES". The policies outlined in this Employment Handbook should be regarded as management guidelines only, which in a developing business will require changes from time to time. "ABC retains the right to make decisions involving employment as needed in order to conduct its work in a manner that is beneficial to the employees and to "BRIDGES”. This Employee Handbook supersedes and replaces any and all prior Employment Handbooks and inconsistent verbal or written policy statements. Except for the policy of at-will employment, which can only be changed by the Director of the "ABC. In writing, the “ABC reserves the right to revise, delete and add to the provisions of this Employee Handbook. All such revisions, deletions, or additions must be in writing and must be signed by the Director of the "ABC. No oral statements or representations can change the provisions of this Employee Handbook.')
+                        Text::make('This Employee Handbook contains information about the employment policies and practices of the ABC, here after referred to as the "BRIDGES". We expect each employee to read this Employee Handbook carefully, as it is a valuable reference for understanding your job and the "BRIDGES". The policies outlined in this Employment Handbook should be regarded as management guidelines only, which in a developing business will require changes from time to time. "Bridges Speech Center retains the right to make decisions involving employment as needed in order to conduct its work in a manner that is beneficial to the employees and to "BRIDGES”. This Employee Handbook supersedes and replaces any and all prior Employment Handbooks and inconsistent verbal or written policy statements. Except for the policy of at-will employment, which can only be changed by the Director of the "ABC. In writing, the “Bridges Speech Center reserves the right to revise, delete and add to the provisions of this Employee Handbook. All such revisions, deletions, or additions must be in writing and must be signed by the Director of the "ABC. No oral statements or representations can change the provisions of this Employee Handbook.')
                     ]),
                 Section::make('Statement of Philosophy')
                     ->schema([
@@ -97,7 +95,7 @@ class HandbookForm
                     ]),
                 Section::make('New Employee Orientation')
                     ->schema([
-                        Text::make('Upon joining our organisation, you were given this copy of our Employee Handbook. After reading this Employee Handbook, please sign the receipt page and return it to our manager. You will be asked to complete all the necessary forms. Your supervisor is responsible for the operations of your department. He or She is a good source of information about the "ABC and your job.')
+                        Text::make('Upon joining our organisation, you were given this copy of our Employee Handbook. After reading this Employee Handbook, please sign the receipt page and return it to our manager. You will be asked to complete all the necessary forms. Your supervisor is responsible for the operations of your department. He or She is a good source of information about the "Bridges Speech Center and your job.')
                     ]),
                 Section::make('Performance Reviews')
                     ->schema([
@@ -151,7 +149,7 @@ class HandbookForm
                     ]),
                 Section::make('Discipline')
                     ->schema([
-                        Text::make('ABC shall be progressive, depending on the nature of the problem. Its purpose is to identify unsatisfactory performance and/or unacceptable behaviour. The stages may be:'),
+                        Text::make('Bridges Speech Center shall be progressive, depending on the nature of the problem. Its purpose is to identify unsatisfactory performance and/or unacceptable behaviour. The stages may be:'),
                         UnorderedList::make([
                             'Verbal Warning',
                             'Written Warning in the form of Memo',
@@ -162,14 +160,14 @@ class HandbookForm
                 TextInput::make("hours_of_work_2")->label("Hours of work")->live(onBlur: true),
                 Section::make('Hours of Work')
                     ->schema([
-                        Text::make(fn(Get $get) => 'The regular office hours for ABC are 8 am to 10 pm for 6 days a week, where your scheduled off day will be ' . $get('hours_of_work_2') . '. Employees are required to fill out a leave form and email it in advance for planned days away from the office. Unplanned absences from the office should be reported to the Clinical Director and the Center Manager as soon as reasonably possible, and the leave form should be emailed along with a sick leave certificate.'),
+                        Text::make(fn(Get $get) => 'The regular office hours for Bridges Speech Center are 8 am to 10 pm for 6 days a week, where your scheduled off day will be ' . $get('hours_of_work_2') . '. Employees are required to fill out a leave form and email it in advance for planned days away from the office. Unplanned absences from the office should be reported to the Clinical Director and the Center Manager as soon as reasonably possible, and the leave form should be emailed along with a sick leave certificate.'),
                     ]),
                 Section::make('Attendance and Punctuality')
                     ->schema([
                         Text::make('Attendance and punctuality are important factors for your success within our organisation.'),
                         Text::make('In case of emergency leave due to illness: If you are going to be late for work or absent, notify your Clinical Director/Manager as far in advance as is feasible under the circumstances, but not later than before the start of your workday. You must speak to your Clinical Director/Manager. Voicemail messages are not accepted.'),
                         Text::make('Personal issues requiring time away from your work, such as doctor\'s appointments or other matters, should be scheduled during your non-working hours if possible.'),
-                        Text::make('If you are absent for three days without notifying ABC Organisation, it is assumed that you have voluntarily abandoned your position with ABC organisation, and you will be removed from the position.'),
+                        Text::make('If you are absent for three days without notifying Bridges Speech Center Organisation, it is assumed that you have voluntarily abandoned your position with Bridges Speech Center organisation, and you will be removed from the position.'),
                     ]),
 
                 Section::make('Overtime')
@@ -185,8 +183,8 @@ class HandbookForm
                     ->schema([
                         Text::make('Your thoughtfulness is appreciated and will be noted favourably should you ever wish to reapply for employment with ABC. Employees, who are rehired following a break in service in excess of three months, other than an approved leave of absence, must serve a new initial probationary period whether or not such period was previously completed. Such employees are considered new employees from the effective date of their reemployment for all purposes, including the purposes of measuring benefits.'),
                         Text::make('Generally, we will confirm upon request our employees\' dates of employment, salary history and job title.'),
-                        Text::make('Additionally, all resigning employees should complete a brief exit interview prior to leaving. All ABC property and resources including this Employee Handbook, must be returned upon discharge. Otherwise, ABC may take action to recoup any replacement costs and/or seek the return of organisation property through appropriate legal recourse.'),
-                        Text::make('You should notify ABC of any address changes for future contact purposes.'),
+                        Text::make('Additionally, all resigning employees should complete a brief exit interview prior to leaving. All Bridges Speech Center property and resources including this Employee Handbook, must be returned upon discharge. Otherwise, Bridges Speech Center may take action to recoup any replacement costs and/or seek the return of organisation property through appropriate legal recourse.'),
+                        Text::make('You should notify Bridges Speech Center of any address changes for future contact purposes.'),
                     ]),
 
                 Section::make('Sick Leave')
@@ -226,7 +224,7 @@ class HandbookForm
                 Section::make('Personal Telephone Calls')
                     ->schema([
                         Text::make('It is important to keep our telephone lines free for business calls. Although the occasional use of the ABC’s telephones for a personal emergency may be necessary, routine personal calls should be kept to a minimum.'),
-                        Text::make('Personal cellular telephones must be turned off or set to a silent alert during working hours while on the ABC premises.'),
+                        Text::make('Personal cellular telephones must be turned off or set to a silent alert during working hours while on the Bridges Speech Center premises.'),
                     ]),
 
                 Section::make('Internet Usage and Monitoring')
@@ -242,9 +240,9 @@ class HandbookForm
                     ->schema([
                         Text::make('This policy contains guidelines for Electronic Communications created, sent, received, used, transmitted, or stored using organisation communication systems or equipment and employee-provided systems or equipment used either in the workplace, during working time, or to accomplish work tasks. "Electronic Communications" include, among other things, messages, images, data or any other information used in e-mail, instant messages, voice mail, fax machines, computers, personal digital assistants (Blackberry, Phone, or similar devices), text messages, pagers, telephones, cellular and mobile phones including those with cameras, Intranet, Internet, back-up storage, information on a memory or flash key or card, jump or zip drive or any other type of internal or external removable storage drives. In the remainder of this policy, all of these communication devices are collectively referred to as "Systems".'),
                         Text::make('Employees may use our Systems to communicate internally with co-workers or externally with children and families, suppliers, vendors, advisors, and other business acquaintances for business purposes.'),
-                        Text::make('All Electronic Communications in the organisation system are organisation records and/or property. Although an employee may have an individual password to access our Systems, the Systems and Electronic Communications belong to the ABC. The Systems and Electronic Communications are accessible to ABC at all times including periodic unannounced inspections. Our Systems and Electronic Communications are subject to use, access, monitoring, review, recording, and disclosure without further notice.'),
+                        Text::make('All Electronic Communications in the organisation system are organisation records and/or property. Although an employee may have an individual password to access our Systems, the Systems and Electronic Communications belong to the ABC. The Systems and Electronic Communications are accessible to Bridges Speech Center at all times including periodic unannounced inspections. Our Systems and Electronic Communications are subject to use, access, monitoring, review, recording, and disclosure without further notice.'),
                         Text::make('Our Systems and Electronic Communications are not confidential or private. ABC\'s right to use, access, monitor, record and disclose Electronic Communications without further notice applies equally to employee-provided systems or equipment used in the workplace, during working time, or to accomplish work tasks.'),
-                        Text::make('Although incidental and occasional personal use of our Systems that does not interfere or conflict with productivity or ABC\'s business or violate policy is permitted, personal communications in our Systems are treated the same as all other Electronic Communications and will be used, accessed, recorded, monitored, and disclosed by ABC at any time without further notice. Since all Electronic Communications and Systems can be accessed without advance notice, employees should not use our Systems for communication or information that employees would not want revealed to third parties.'),
+                        Text::make('Although incidental and occasional personal use of our Systems that does not interfere or conflict with productivity or ABC\'s business or violate policy is permitted, personal communications in our Systems are treated the same as all other Electronic Communications and will be used, accessed, recorded, monitored, and disclosed by Bridges Speech Center at any time without further notice. Since all Electronic Communications and Systems can be accessed without advance notice, employees should not use our Systems for communication or information that employees would not want revealed to third parties.'),
                         Text::make('Employees may not use our Systems in a manner that violates our policies including but not limited to Non-Harassment, Sexual Harassment, Equal Employment Opportunity, Confidentiality of Organisation Matters, Care of Children and Families\' Records, Protecting Information, Solicitation and Distribution, and Internet Usage. Employees may not use our Systems in any way that may be seen as insulting, disruptive, obscene, offensive, or harmful to morale. Examples of prohibited uses include, but are not limited to, sexually-explicit drawings, messages, images, cartoons, or jokes; propositions or love letters; ethnic or racial slurs, threats, or derogatory comments; or any other message or image that may be in violation of organisation policies.'),
                     ]),
                 Section::make('Prohibited Uses of Systems')
@@ -253,34 +251,34 @@ class HandbookForm
                         Text::make('• To download, save, send or access any defamatory, discriminatory or obscene material.'),
                         Text::make('• To download, save, send or access any music, audio, or video file.'),
                         Text::make('• To download anything from the Internet (including shareware or free software) without the advance written permission of the Systems supervisor.'),
-                        Text::make('• To download, save, send or access any site or content the ABC might deem "adult entertainment".'),
+                        Text::make('• To download, save, send or access any site or content the Bridges Speech Center might deem "adult entertainment".'),
                         Text::make('• To access any "blog" or otherwise post a personal opinion on the internet.'),
                         Text::make('• To solicit employees or others.'),
-                        Text::make('• To attempt or gain unauthorized or unlawful access to computers, equipment, networks, or systems of ABC or any other person or entity.'),
+                        Text::make('• To attempt or gain unauthorized or unlawful access to computers, equipment, networks, or systems of Bridges Speech Center or any other person or entity.'),
                         Text::make('• In connection with any infringement of intellectual property rights, including but not limited to copyrights.'),
                         Text::make('• In connection with the violation or attempted violation of any law.'),
                         Text::make('An employee may not misrepresent, disguise, or conceal his or her identity or another\'s identity in any way while using Electronic Communications; make changes to Electronic Communications without clearly indicating such changes; or use another person\'s account, mailbox, password, etc. without prior written approval of the account owner and without identifying the actual author.'),
-                        Text::make('Employees must always respect intellectual property rights such as copyrights and trademarks. Employees must not copy, use, or transfer proprietary materials of ABC or others without appropriate authorization.'),
+                        Text::make('Employees must always respect intellectual property rights such as copyrights and trademarks. Employees must not copy, use, or transfer proprietary materials of Bridges Speech Center or others without appropriate authorization.'),
                         Text::make('All systems passwords and encryption keys must be available and known to ABC. Employees may not install password or encryption programs without the written permission of your supervisor. Employees may not use the passwords and encryption keys belonging to others.'),
-                        Text::make('Violations of this policy may result in disciplinary action up to and including discharge as well as possible civil liabilities or criminal prosecution. Where appropriate, ABC may advise legal officials or appropriate third parties of policy violations and cooperate with official investigations. ABC will not retaliate against anyone who reports possible policy violations or assists with investigations.'),
+                        Text::make('Violations of this policy may result in disciplinary action up to and including discharge as well as possible civil liabilities or criminal prosecution. Where appropriate, Bridges Speech Center may advise legal officials or appropriate third parties of policy violations and cooperate with official investigations. Bridges Speech Center will not retaliate against anyone who reports possible policy violations or assists with investigations.'),
                         Text::make('If you have questions about the acceptable use of our Systems or the content of Electronic Communications, ask your supervisor for advance clarification.'),
                     ]),
                 Section::make('Social Media')
                     ->schema([
-                        Text::make('ABC has in place policies that govern use of its own electronic communication systems, equipment, and resources which employees must follow. ABC may also have an interest in your electronic communications with co-workers, children and families, vendors, suppliers, competitors, and the general public on your own time. Inappropriate communications, even made on your own time using your own resources, may be grounds for discipline up to and including immediate termination. We encourage you to use good judgment when communicating via blogs, online chat rooms, networking internet sites, social internet sites, and other electronic and non-electronic forums (collectively "social media"). The following is a general and non-exhaustive list of guidelines you should keep in mind:'),
+                        Text::make('Bridges Speech Center has in place policies that govern use of its own electronic communication systems, equipment, and resources which employees must follow. Bridges Speech Center may also have an interest in your electronic communications with co-workers, children and families, vendors, suppliers, competitors, and the general public on your own time. Inappropriate communications, even made on your own time using your own resources, may be grounds for discipline up to and including immediate termination. We encourage you to use good judgment when communicating via blogs, online chat rooms, networking internet sites, social internet sites, and other electronic and non-electronic forums (collectively "social media"). The following is a general and non-exhaustive list of guidelines you should keep in mind:'),
                         Text::make('• Make it clear that views expressed in social media are yours alone. Do not purport to represent the views of the Organisation in any fashion.'),
-                        Text::make('• Do not disclose confidential or proprietary information regarding ABC or your co-workers. Use of copyrighted or trademarked ABC’s information, trade secrets, or other sensitive information may subject you to legal action. If you doubt whether it is proper to disclose information, please discuss it with your supervisor.'),
-                        Text::make('• Do not disclose information that could subject ABC to legal liability. If ABC is subjected to government investigation or financial liability based on your disclosures, ABC may seek to hold you personally responsible.'),
-                        Text::make('• Do not use ABC logos, trademarks, or other symbols in social media. You may not use ABC name to endorse, promote, denigrate or otherwise comment on any product, opinion, cause or person.'),
+                        Text::make('• Do not disclose confidential or proprietary information regarding Bridges Speech Center or your co-workers. Use of copyrighted or trademarked ABC’s information, trade secrets, or other sensitive information may subject you to legal action. If you doubt whether it is proper to disclose information, please discuss it with your supervisor.'),
+                        Text::make('• Do not disclose information that could subject Bridges Speech Center to legal liability. If Bridges Speech Center is subjected to government investigation or financial liability based on your disclosures, Bridges Speech Center may seek to hold you personally responsible.'),
+                        Text::make('• Do not use Bridges Speech Center logos, trademarks, or other symbols in social media. You may not use Bridges Speech Center name to endorse, promote, denigrate or otherwise comment on any product, opinion, cause or person.'),
                         Text::make('• Be respectful of the privacy and dignity of your co-workers. Do not use or post photos of co-workers without their express consent.'),
-                        Text::make('• Harassing, obscene, defamatory, threatening, or other offensive content must be avoided. Harassing or discriminatory comments, particularly if made on the basis of gender, race, religion, age, national origin, or another protected characteristic, may be deemed inappropriate even if ABC name is not mentioned. If social media communications in any way may adversely affect your relationships at work or violate organisation policy, you may be subject to discipline up to and including immediate termination under various organisation policies.'),
+                        Text::make('• Harassing, obscene, defamatory, threatening, or other offensive content must be avoided. Harassing or discriminatory comments, particularly if made on the basis of gender, race, religion, age, national origin, or another protected characteristic, may be deemed inappropriate even if Bridges Speech Center name is not mentioned. If social media communications in any way may adversely affect your relationships at work or violate organisation policy, you may be subject to discipline up to and including immediate termination under various organisation policies.'),
                         Text::make('• Ensure that engaging in social media does not interfere with your work commitments.'),
                         Text::make('• Social media and similar communications have the potential to reflect on both you and ABC. We hope that you will show respect for your employees, children and families, affiliates and competitors.'),
                     ]),
                 Section::make('Dress Policy')
                     ->schema([
                         Text::make('Employees are expected to maintain the highest standards of personal cleanliness and present a neat, professional, and clean appearance at all times.'),
-                        Text::make('Our children and families\' satisfaction represents the most important and challenging aspect of our business. Whether or not your job responsibilities place you in direct children and families\' contact, you represent ABC with your appearance as well as your actions.'),
+                        Text::make('Our children and families\' satisfaction represents the most important and challenging aspect of our business. Whether or not your job responsibilities place you in direct children and families\' contact, you represent Bridges Speech Center with your appearance as well as your actions.'),
                         Text::make('The properly attired individual helps to create a favourable image for ABC, to the public and fellow employees. Scrub suits/Uniforms will be provided to all medical professionals. Please ensure that you wear the provided scrub suits along with black shoes or black Crocs. This helps maintain a professional appearance and ensures compliance with our dress code.'),
                         Text::make('If you have questions regarding appropriate work attire, please contact the Administrator for further clarification.'),
                     ]),
@@ -297,7 +295,7 @@ class HandbookForm
                     ]),
                 Section::make('Contact with the Media')
                     ->schema([
-                        Text::make('All media inquiries regarding ABC and its operations must be referred to the director. Only the director is authorized to make or approve public statements on behalf of ABC. No employees, unless specifically designated by the director, are authorized to make statements on behalf of or as a representative of ABC.'),
+                        Text::make('All media inquiries regarding Bridges Speech Center and its operations must be referred to the director. Only the director is authorized to make or approve public statements on behalf of ABC. No employees, unless specifically designated by the director, are authorized to make statements on behalf of or as a representative of ABC.'),
                     ]),
                 Section::make('Office Supplies')
                     ->schema([
@@ -307,8 +305,8 @@ class HandbookForm
                     ]),
                 Section::make('Workplace Searches')
                     ->schema([
-                        Text::make('To protect the property and to ensure the safety of all employees, children and families and ABC, ABC reserves the right to conduct personal searches consistent with state law, and to inspect any packages, parcels, purses, handbags, brief cases, lunch boxes or any other possessions or articles carried to and from ABC\'s property. In addition, ABC reserves the right to search any employee\'s office, desk, files, locker, equipment or any other area or article on our premises. In this regard, it should be noted that all offices, desks, files, lockers, equipment, etc. are the property of ABC, and are issued for the use of employees only during their employment. Inspection may be conducted at any time at the discretion of ABC.'),
-                        Text::make('Persons entering the premises who refuse to cooperate in an inspection conducted pursuant to this policy may not be permitted to enter the premises. Employees working on or entering or leaving the premises who refuse to cooperate in an inspection, as well as employees who after the inspection are believed to be in possession of stolen property or illegal substances, will be subject to disciplinary action, up to and including discharge, if upon investigation they are found to be in violation of ABC security procedures or any other rules and regulations.'),
+                        Text::make('To protect the property and to ensure the safety of all employees, children and families and ABC, Bridges Speech Center reserves the right to conduct personal searches consistent with state law, and to inspect any packages, parcels, purses, handbags, brief cases, lunch boxes or any other possessions or articles carried to and from ABC\'s property. In addition, Bridges Speech Center reserves the right to search any employee\'s office, desk, files, locker, equipment or any other area or article on our premises. In this regard, it should be noted that all offices, desks, files, lockers, equipment, etc. are the property of ABC, and are issued for the use of employees only during their employment. Inspection may be conducted at any time at the discretion of ABC.'),
+                        Text::make('Persons entering the premises who refuse to cooperate in an inspection conducted pursuant to this policy may not be permitted to enter the premises. Employees working on or entering or leaving the premises who refuse to cooperate in an inspection, as well as employees who after the inspection are believed to be in possession of stolen property or illegal substances, will be subject to disciplinary action, up to and including discharge, if upon investigation they are found to be in violation of Bridges Speech Center security procedures or any other rules and regulations.'),
                     ]),
                 Section::make('Workplace Violence')
                     ->schema([
@@ -339,7 +337,7 @@ class HandbookForm
                     ]),
                 Section::make('Staff Meetings')
                     ->schema([
-                        Text::make('Staff meetings should be held at least once a week to discuss policies and procedures, concerns, feedback, and future plans in the Centre. Everyone is required to attend these meetings as ABC believes that having one goal is the best way to run the Centre.'),
+                        Text::make('Staff meetings should be held at least once a week to discuss policies and procedures, concerns, feedback, and future plans in the Centre. Everyone is required to attend these meetings as Bridges Speech Center believes that having one goal is the best way to run the Centre.'),
                     ]),
                 Section::make('Parent Meetings')
                     ->schema([
@@ -373,20 +371,21 @@ class HandbookForm
                     ]),
                 Section::make('Receipt of Employee Handbook and Employment-At-Will Statement')
                     ->schema([
-                        Text::make('This is to acknowledge that I have received a copy of ABC Employee Handbook and I understand that it contains information about the employment policies and practices of ABC. I agree to read and comply with this Employee Handbook. I understand that the policies outlined in this Employee Handbook are management guidelines only, which in a developing business will require changes from time to time. I understand that ABC retains the right to make decisions involving employment as needed in order to conduct its work in a manner that is beneficial to the employees and ABC. I understand that this Employee Handbook supersedes and replaces any and all prior Employee Handbooks and any inconsistent verbal or written policy statements.'),
-                        Text::make('I understand that except for the policy of at-will employment, which can only be changed by the Director of ABC in a signed written contract, the organisation reserves the right to revise, delete and add to the provisions of this Employee Handbook at any time without further notice. All such revisions, deletions or additions to the Employee Handbook will be in writing and will be signed by the Director of ABC. I understand that no oral statements or representations can change the provisions of this Employee Handbook.'),
+                        Text::make('This is to acknowledge that I have received a copy of Bridges Speech Center Employee Handbook and I understand that it contains information about the employment policies and practices of ABC. I agree to read and comply with this Employee Handbook. I understand that the policies outlined in this Employee Handbook are management guidelines only, which in a developing business will require changes from time to time. I understand that Bridges Speech Center retains the right to make decisions involving employment as needed in order to conduct its work in a manner that is beneficial to the employees and ABC. I understand that this Employee Handbook supersedes and replaces any and all prior Employee Handbooks and any inconsistent verbal or written policy statements.'),
+                        Text::make('I understand that except for the policy of at-will employment, which can only be changed by the Director of Bridges Speech Center in a signed written contract, the organisation reserves the right to revise, delete and add to the provisions of this Employee Handbook at any time without further notice. All such revisions, deletions or additions to the Employee Handbook will be in writing and will be signed by the Director of ABC. I understand that no oral statements or representations can change the provisions of this Employee Handbook.'),
                         Text::make('I understand that this Employee Handbook is not intended to create contractual obligations with respect to any matters it covers and that the Employee Handbook does not create a contract guaranteeing that I will be employed for any specific time period.'),
-                        Text::make('I understand that this Employee Handbook refers to current benefit plans maintained by ABC and that I must refer to the actual plan documents and summary plan descriptions as these documents are controlling.'),
+                        Text::make('I understand that this Employee Handbook refers to current benefit plans maintained by Bridges Speech Center and that I must refer to the actual plan documents and summary plan descriptions as these documents are controlling.'),
                         Text::make('If I have questions regarding the content or interpretation of this Employee Handbook, I will ask my immediate supervisor or a member of the management.'),
                         Text::make('I also understand that if a written contract is inconsistent with the Employee Handbook, my employment contract is controlling.'),
                     ]),
+
                 Section::make('First Party')->schema([
                     Select::make('first_party_user_id')
-                        ->label('user')
                         ->relationship(name: 'firstPartyUser')
                         ->native(false)
                         ->required()
-                        ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name}"),
+                        ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name} ({$record->staff_id}) (Dept: {$record->department?->name})")
+                        ->live(),
                     SignaturePad::make('first_party_signature')->label('Signature')->dotSize(2.0)
                         ->lineMinWidth(0.5)
                         ->lineMaxWidth(2.5)
@@ -397,7 +396,7 @@ class HandbookForm
                         ->penColor('#000000')
                         ->penColorOnDark('#000000'),
                 ])->columns(2),
-                Section::make('First Party')->schema([
+                Section::make('Second Party')->schema([
                     TextInput::make('second_party_name')->label('Name'),
                     TextInput::make('second_party_passport_number')->label('Passport'),
                     Textarea::make('second_party_current_address')->label('Address'),

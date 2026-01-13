@@ -3,10 +3,13 @@
 namespace App\Filament\Resources\DisputeManagement\Pages;
 
 use App\Filament\Resources\DisputeManagement\DisputeManagementResource;
+use App\Mail\DisputeManagement;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
+use Illuminate\Support\Facades\Mail;
 
 class ViewDisputeManagement extends ViewRecord
 {
@@ -31,6 +34,16 @@ class ViewDisputeManagement extends ViewRecord
 
                     return response()->download($path)->deleteFileAfterSend(true);
                 }),
+
+            Action::make('Send Mail')
+                ->action(function () {
+                    Mail::to($this->record->user->email)->send(new DisputeManagement($this->record));
+
+                    Notification::make()
+                        ->title('Sent successfully')
+                        ->success()
+                        ->send();
+                })
         ];
     }
 

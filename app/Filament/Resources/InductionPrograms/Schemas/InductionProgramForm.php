@@ -26,14 +26,15 @@ class InductionProgramForm
         return $schema
             ->components([
                 Select::make('user_id')
-                    ->relationship('user')
+                    ->relationship(name: 'user')
+                    ->live()
                     ->native(false)
                     ->required()
-                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name}")
-                    ->live()
+                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name} ({$record->staff_id}) (Dept: {$record->department?->name})")
                     ->afterStateUpdated(function ($state, $set) {
                         $set('selected_user', User::find($state));
                     }),
+
                 TextInput::make('job_title'),
                 Text::make("This is a checklist of information for Induction which HR Officer/supervisors should use with new staff as part of their induction programme within the first two weeks of employment. Health and Safety measures will be identified at immediately. The new employee should be asked to tick each subject as he/she has been informed about it, and sign the end of the form. The HR /supervisor then keeps the form for inclusion in the employee’s personnel file."),
                 Section::make("Items to Cover with Each New Employee")
@@ -80,9 +81,10 @@ class InductionProgramForm
                     ]),
                 Section::make("Staff Induction Document")
                     ->schema([
-                        Text::make(fn($get) => 'I, ' . $get('selected_user')?->fullname . 'acknowledge that I have received guidance and understood staff induction program the provided by ' . $get('hr_name') . '.  I understand the policies, procedures, and terms and conditions outlined during induction and agree to abide by them during my employment with'),
+                        Text::make(fn($get) => 'I, ' . $get('selected_user')?->fullname . ' acknowledge that I have received guidance and understood staff induction program the provided by ' . $get('hr_name') . '.  I understand the policies, procedures, and terms and conditions outlined during induction and agree to abide by them during my employment with'),
                         Text::make("By signing this form, I confirm that I have understood and agree to comply with all the guidelines and requirements set forth in the staff induction program."),
                     ]),
+                Text::make("Bridges Speech Center LLC")->size(TextSize::Large),
                 Section::make("First Party")
                     ->schema([
                         TextInput::make("first_party_name")->label("Name"),

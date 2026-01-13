@@ -22,6 +22,8 @@ class AppoinmentReportReminderResource extends Resource
 {
     protected static ?string $model = AppoinmentReportReminder::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string | UnitEnum | null $navigationGroup = 'Admin';
 
     public static function form(Schema $schema): Schema

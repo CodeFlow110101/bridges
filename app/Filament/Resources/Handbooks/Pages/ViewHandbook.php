@@ -31,6 +31,9 @@ class ViewHandbook extends ViewRecord
 
                     return response()->download($path)->deleteFileAfterSend(true);
                 }),
+            Action::make('View')
+                ->url(fn() => route('handbook.view', $this->record->id))
+                ->openUrlInNewTab()
         ];
     }
 

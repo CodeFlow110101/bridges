@@ -31,6 +31,13 @@
             background: #f9f9f9
         }
 
+        .signature-box {
+            border-top: 1px solid #000;
+            padding-top: 10px;
+            text-align: center;
+            font-size: 12px;
+        }
+
         .section-title {
             font-weight: 700;
             background: #333;
@@ -125,6 +132,12 @@
                 <div class="value">{{ $record->contact?->number ?? $record->contact?->phone ?? '' }}</div>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <div class="label">Signature</div>
+                <img src="{{ $record->first_party_signature }}" alt="Client Signature" class="signature-image" />
+            </div>
+        </div>
     </div>
 
     <div class="section">
@@ -149,6 +162,13 @@
                 <div class="value">{{ $record->second_party_date ? \Carbon\Carbon::parse($record->second_party_date)->format('d-m-Y') : '' }}</div>
             </div>
         </div>
+        <div style="margin-top: 30px;">
+            <div class="signature-box">
+                <div class="label">Signature</div>
+                <img src="{{ $record->second_party_signature }}" alt="Client Signature" class="signature-image" />
+            </div>
+        </div>
+    </div>
     </div>
 
     <div class="footer">

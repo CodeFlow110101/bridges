@@ -22,6 +22,8 @@ class StaffEnrollmentTrainingResource extends Resource
 {
     protected static ?string $model = StaffEnrollmentTraining::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string | UnitEnum | null $navigationGroup = 'Admin';
 
     public static function form(Schema $schema): Schema

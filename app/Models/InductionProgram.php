@@ -106,7 +106,7 @@ class InductionProgram extends Model
         ],
 
         // Conditions of Employment
-        'conditions' => [
+        'Conditions to Conditions of Employment' => [
             'iohow' => 'Information on hours of work',
             'trfpeiam' => 'Time recording, finger punching, Email ID, Attendance marking',
             'jd' => 'Job description',
@@ -121,7 +121,7 @@ class InductionProgram extends Model
         ],
 
         // Health & Safety
-        'health_safety' => [
+        'Health safety to Health and Safety, Security, Fire' => [
             'has' => 'Health and safety information relevant to the department',
             'iofiap' => 'Issuing of fire instructions and procedure',
             'loffe' => 'Location of fire-fighting equipment',
@@ -173,7 +173,7 @@ class InductionProgram extends Model
         ],
 
         // Department-specific
-        'department_specific' => [
+        'Department specific to Items Specific to Department' => [
             'pay' => 'Payroll',
         ],
     ];
