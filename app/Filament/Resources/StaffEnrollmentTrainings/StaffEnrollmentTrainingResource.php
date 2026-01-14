@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\StaffEnrollmentTrainings;
 
 use App\Filament\Pages\Administration;
+use App\Filament\Pages\Staff;
 use App\Filament\Resources\StaffEnrollmentTrainings\Pages\CreateStaffEnrollmentTraining;
 use App\Filament\Resources\StaffEnrollmentTrainings\Pages\EditStaffEnrollmentTraining;
 use App\Filament\Resources\StaffEnrollmentTrainings\Pages\ListStaffEnrollmentTrainings;
@@ -23,6 +24,8 @@ class StaffEnrollmentTrainingResource extends Resource
     protected static ?string $model = StaffEnrollmentTraining::class;
 
     protected static bool $shouldRegisterNavigation = false;
+
+    public static ?string $parentPage = Staff::class;
 
     protected static string | UnitEnum | null $navigationGroup = 'Admin';
 

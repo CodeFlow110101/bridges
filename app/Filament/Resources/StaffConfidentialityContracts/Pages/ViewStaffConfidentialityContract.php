@@ -3,8 +3,10 @@
 namespace App\Filament\Resources\StaffConfidentialityContracts\Pages;
 
 use App\Filament\Resources\StaffConfidentialityContracts\StaffConfidentialityContractResource;
+use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ViewStaffConfidentialityContract extends ViewRecord
 {

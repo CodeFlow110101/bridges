@@ -31,7 +31,7 @@ class StaffConfidentialityContractForm
                     ->required()
                     ->live()
                     ->columnSpanFull()
-                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name} ({$record->staff_id})")
+                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name} ({$record->staff_id}) (Dept: {$record->department?->name})")
                     ->afterStateUpdated(function (?string $state, ?string $old, Set $set) {
                         $user = User::find($state);
                         $set('name', $user?->full_name);
@@ -199,7 +199,7 @@ class StaffConfidentialityContractForm
                 Section::make("Second Party Details")
                     ->columnSpanFull()
                     ->schema([
-                        TextInput::make('second_party_name')->label("name"),
+                        TextInput::make('second_party_name')->label("Name"),
                         TextInput::make('second_party_passport_no')->label("Passport_no"),
                         Textarea::make('second_party_current_address')->label("Address")
                             ->columnSpanFull(),
