@@ -7,9 +7,11 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ExportAction;
+use Filament\Actions\ExportBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class DisputeManagementTable
 {
@@ -30,13 +32,9 @@ class DisputeManagementTable
                 ViewAction::make(),
                 EditAction::make(),
             ])
-            ->headerActions([
-                ExportAction::make()
-                    ->exporter(DisputeManagementExporter::class),
-            ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    // DeleteBulkAction::make(),
+                    ExportBulkAction::make()->exporter(DisputeManagementExporter::class)
                 ]),
             ]);
     }

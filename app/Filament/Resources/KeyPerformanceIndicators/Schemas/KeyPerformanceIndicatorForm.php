@@ -19,6 +19,7 @@ use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\UnorderedList;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Components\Placeholder;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 class KeyPerformanceIndicatorForm
@@ -73,10 +74,17 @@ class KeyPerformanceIndicatorForm
                                     ->deletable(false)
                                     ->label(fn($get, $record) => new HtmlString("<div></div>"))
                                     ->addActionLabel('Add')
-                                    ->schema(KeyPerformanceIndicator::getTarget1Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(onBlur: true)
+                                    ->schema(KeyPerformanceIndicator::getTarget1Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(debounce: 200)
                                         ->partiallyRenderComponentsAfterStateUpdated(['administration_total'])
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) use ($column) {
-                                            $set("administration_total", KeyPerformanceIndicator::getTarget1Columns()->forget($column)->pipe(fn($columns) => $columns)->map(fn($columns) => $get($columns))->sum());
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                            $set("administration_total", KeyPerformanceIndicator::getTarget1Columns()->map(fn($col) => $get($col))->sum());
+                                            $set('../../overall_total', collect([
+                                                "target1",
+                                                "target2",
+                                                "target3",
+                                            ])->map(function ($field) use ($get) {
+                                                return collect(collect($get("../../" . $field))->first())->last();
+                                            })->sum());
                                         }))
                                         ->push(TextInput::make('administration_total')->formatStateUsing(fn($livewire) => $livewire->record?->target1Score)->disabled())
                                         ->all())
@@ -92,10 +100,17 @@ class KeyPerformanceIndicatorForm
                                     ->deletable(false)
                                     ->label(fn() => new HtmlString("<div></div>"))
                                     ->addActionLabel('Add')
-                                    ->schema(KeyPerformanceIndicator::getTarget2Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(onBlur: true)
+                                    ->schema(KeyPerformanceIndicator::getTarget2Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(debounce: 200)
                                         ->partiallyRenderComponentsAfterStateUpdated(['planning_total'])
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) use ($column) {
-                                            $set("planning_total", KeyPerformanceIndicator::getTarget2Columns()->forget($column)->pipe(fn($columns) => $columns)->map(fn($columns) => $get($columns))->sum());
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                            $set("planning_total", KeyPerformanceIndicator::getTarget2Columns()->map(fn($col) => $get($col))->sum());
+                                            $set('../../overall_total', collect([
+                                                "target1",
+                                                "target2",
+                                                "target3",
+                                            ])->map(function ($field) use ($get) {
+                                                return collect(collect($get("../../" . $field))->first())->last();
+                                            })->sum());
                                         }))
                                         ->push(TextInput::make('planning_total')->formatStateUsing(fn($livewire) => $livewire->record?->target2Score)->disabled())
                                         ->all())
@@ -111,10 +126,17 @@ class KeyPerformanceIndicatorForm
                                     ->deletable(false)
                                     ->label(fn() => new HtmlString("<div></div>"))
                                     ->addActionLabel('Add')
-                                    ->schema(KeyPerformanceIndicator::getTarget3Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(onBlur: true)
+                                    ->schema(KeyPerformanceIndicator::getTarget3Columns()->map(fn($column) => TextInput::make($column)->mask('99')->default(0)->live(debounce: 200)
                                         ->partiallyRenderComponentsAfterStateUpdated(['performance_total'])
-                                        ->afterStateUpdated(function ($state, Get $get, Set $set) use ($column) {
-                                            $set("performance_total", KeyPerformanceIndicator::getTarget3Columns()->forget($column)->pipe(fn($columns) => $columns)->map(fn($columns) => $get($columns))->sum());
+                                        ->afterStateUpdated(function ($state, Get $get, Set $set, $livewire) {
+                                            $set("performance_total", KeyPerformanceIndicator::getTarget3Columns()->map(fn($col) => $get($col))->sum());
+                                            $set('../../overall_total', collect([
+                                                "target1",
+                                                "target2",
+                                                "target3",
+                                            ])->map(function ($field) use ($get) {
+                                                return collect(collect($get("../../" . $field))->first())->last();
+                                            })->sum());
                                         }))
                                         ->push(TextInput::make('performance_total')->formatStateUsing(fn($livewire) => $livewire->record?->target3Score)->disabled())
                                         ->all())
@@ -130,7 +152,7 @@ class KeyPerformanceIndicatorForm
                             ->addActionLabel('Add Strength and Skills'),
                     ]),
                 Text::make('*Overall performance')->size(TextSize::Large),
-                Text::make('SCORE(Sum of A+B+C): <total of A +B+C>'),
+                TextInput::make("overall_total")->label("SCORE(Sum of A+B+C)")->disabled(),
                 Text::make('*Performance Scoring:')->size(TextSize::Large),
                 UnorderedList::make([
                     'O: Outstanding Performance - Conduct and performance consistently superior',
