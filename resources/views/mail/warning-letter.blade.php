@@ -70,7 +70,7 @@
             <p>
                 [Your Name]<br>
                 [Your Position]<br>
-                [Company Name]
+                Bridges Speech Centre LLC
             </p>
         </div>
     </div>
