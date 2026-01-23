@@ -68,8 +68,8 @@
         <div class="signature">
             <p>Sincerely,</p>
             <p>
-                [Your Name]<br>
-                [Your Position]<br>
+                {{ auth()->user()?->fullName }}<br>
+                {{ auth()->user()?->department?->name }}<br>
                 Bridges Speech Centre LLC
             </p>
         </div>

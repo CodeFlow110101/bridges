@@ -180,7 +180,7 @@
             <div class="signature-section">
                 <div class="signature-box">
                     @if($record->signature)
-                    <img src="data:image/png;base64,{{ $record->signature }}" alt="Signature" class="signature-image" />
+                    <img src="{{ $record->signature }}" alt="Signature" class="signature-image" />
                     @endif
                     <strong>{{ $record->name ?? 'Employee Signature' }}</strong>
                 </div>

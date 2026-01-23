@@ -52,6 +52,7 @@ class UserForm
                 TextInput::make('staff_id')->required()->readOnly(),
                 TextInput::make('email')->required(),
                 DatePicker::make('date_of_birth')->native(false)->maxDate(now()->subYears(18))->default(now()->subYears(18))->required(),
+                DatePicker::make("joining_date")->date('d M Y')->native(false),
                 Select::make('department_id')->relationship('department', 'name')->required()->native(false),
                 TextInput::make('basic_salary')->numeric()->nullable(),
                 TextInput::make('hra')->numeric()->nullable(),
@@ -59,6 +60,65 @@ class UserForm
                 TextInput::make('transportation')->numeric()->nullable(),
                 TextInput::make('password')->password()->revealable()->hiddenOn('edit')->confirmed(),
                 TextInput::make('password_confirmation')->password()->revealable()->hiddenOn('edit'),
+                Section::make('India Contact Information')
+                    ->schema([
+                        TextInput::make('permanent_telephone_india')
+                            ->label('Permanent Telephone (India)')
+                            ->tel()
+                            ->maxLength(20),
+
+                        Textarea::make('permanent_address_india')
+                            ->label('Permanent Address (India)')
+                            ->rows(2),
+                    ])
+                    ->columns(2),
+
+                Section::make('Relative in Dubai')
+                    ->schema([
+                        TextInput::make('relative_name_dubai')
+                            ->label('Relative Name'),
+
+                        TextInput::make('relative_contact_dubai')
+                            ->label('Relative Contact')
+                            ->tel()
+                            ->maxLength(20),
+
+                        Textarea::make('relative_address_dubai')
+                            ->label('Relative Address')
+                            ->rows(2),
+                    ])
+                    ->columns(2),
+
+                Section::make('Friend in Dubai')
+                    ->schema([
+                        TextInput::make('friend_name_dubai')
+                            ->label('Friend Name'),
+
+                        TextInput::make('friend_contact_dubai')
+                            ->label('Friend Contact')
+                            ->tel()
+                            ->maxLength(20),
+
+                        Textarea::make('friend_address_dubai')
+                            ->label('Friend Address')
+                            ->rows(2),
+                    ])
+                    ->columns(2),
+
+                Section::make('Medical Information')
+                    ->schema([
+                        Textarea::make('medical_concern')
+                            ->label('Medical Concern / Ailment')
+                            ->rows(2),
+
+                        Textarea::make('medications')
+                            ->label('Medicines Being Consumed')
+                            ->rows(2),
+
+                        TextInput::make('doctor_or_clinic')
+                            ->label('Doctor / Clinic')
+                            ->maxLength(255),
+                    ]),
                 Section::make('Day 1: Trainee will receive Induction program Sheet')
                     ->schema([
                         DatePicker::make("induction_program_sheet")->date('d M Y')->native(false),
@@ -95,7 +155,7 @@ class UserForm
                             ->schema([
                                 TextInput::make("passport_number")->requiredWith('passport_file', 'passport_expiry'),
                                 DatePicker::make('passport_expiry')->native(false)->requiredWith('passport_file', 'passport_number'),
-                                FileUpload::make('passport_file')->directory('files')->requiredWith('passport_expiry', 'passport_number'),
+                                FileUpload::make('passport_file')->directory('files')->requiredWith('passport_expiry', 'passport_number')->downloadable(),
                             ]),
                         Tab::make('Addresses')
                             ->schema([
@@ -111,7 +171,7 @@ class UserForm
                                     ->relationship()
                                     ->schema([
                                         DatePicker::make('expiry')->native(false)->requiredWith('file'),
-                                        FileUpload::make('file')->directory('files')->requiredWith('expiry'),
+                                        FileUpload::make('file')->directory('files')->requiredWith('expiry')->downloadable(),
                                     ])
                                     ->defaultItems(0)
                             ]),
@@ -139,7 +199,7 @@ class UserForm
                                     ->relationship()
                                     ->schema([
                                         DatePicker::make('expiry')->native(false)->requiredWith('file'),
-                                        FileUpload::make('file')->directory('files')->requiredWith('expiry'),
+                                        FileUpload::make('file')->directory('files')->requiredWith('expiry')->downloadable(),
                                     ])
                                     ->defaultItems(0)
                             ]),
@@ -149,7 +209,7 @@ class UserForm
                                     ->relationship()
                                     ->schema([
                                         DatePicker::make('expiry')->native(false)->requiredWith('file'),
-                                        FileUpload::make('file')->directory('files')->requiredWith('expiry'),
+                                        FileUpload::make('file')->directory('files')->requiredWith('expiry')->downloadable(),
                                     ])
                                     ->defaultItems(0)
                             ]),
@@ -159,7 +219,7 @@ class UserForm
                                     ->relationship()
                                     ->schema([
                                         DatePicker::make('expiry')->native(false)->requiredWith('file'),
-                                        FileUpload::make('file')->directory('files')->requiredWith('expiry'),
+                                        FileUpload::make('file')->directory('files')->requiredWith('expiry')->downloadable(),
                                     ])
                                     ->defaultItems(0)
                             ]),
@@ -169,7 +229,7 @@ class UserForm
                                     ->relationship()
                                     ->schema([
                                         DatePicker::make('expiry')->native(false)->requiredWith('file'),
-                                        FileUpload::make('file')->directory('files')->requiredWith('expiry'),
+                                        FileUpload::make('file')->directory('files')->requiredWith('expiry')->downloadable(),
                                     ])
                                     ->defaultItems(0)
                             ]),
@@ -179,7 +239,7 @@ class UserForm
                                     ->relationship()
                                     ->schema([
                                         DatePicker::make('expiry')->native(false)->requiredWith('file'),
-                                        FileUpload::make('file')->directory('files')->requiredWith('expiry'),
+                                        FileUpload::make('file')->directory('files')->requiredWith('expiry')->downloadable(),
                                         Select::make('type_id')->relationship('type', 'name')->requiredWith(['expiry', 'file'])->native(false),
                                     ])
                                     ->defaultItems(0)

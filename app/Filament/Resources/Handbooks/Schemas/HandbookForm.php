@@ -25,8 +25,20 @@ class HandbookForm
                 Select::make('user_id')
                     ->relationship(name: 'user')
                     ->native(false)
+                    ->live()
                     ->required()
-                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name} ({$record->staff_id}) (Dept: {$record->department?->name})"),
+                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name} ({$record->staff_id}) (Dept: {$record->department?->name})")
+                    ->afterStateUpdated(function ($state, Get $get, Set $set, $livewire) {
+                        $user = User::find($state);
+                        $set("department_name", $user?->department?->name);
+                        $set("passport_number", $user?->passport_number);
+                    }),
+                TextInput::make("department_name")->formatStateUsing(function ($get) {
+                    return User::find($get("user_id"))?->department?->name;
+                })->disabled(),
+                TextInput::make("passport_number")->formatStateUsing(function ($get) {
+                    return User::find($get("user_id"))?->passport_number;
+                })->disabled(),
                 Text::make("(Document: A)")->size(TextSize::Large),
                 Section::make('Introduction')
                     ->schema([

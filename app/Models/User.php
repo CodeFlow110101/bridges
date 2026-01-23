@@ -31,6 +31,7 @@ class User extends Authenticatable implements HasName
         'staff_id',
         'date_of_birth',
         'password',
+        'passport_number',
         'passport_file',
         'passport_expiry',
         'department_id',
@@ -46,6 +47,18 @@ class User extends Authenticatable implements HasName
         "hra",
         "other_allowances",
         "transportation",
+        'permanent_telephone_india',
+        'permanent_address_india',
+        'relative_name_dubai',
+        'relative_contact_dubai',
+        'relative_address_dubai',
+        'friend_name_dubai',
+        'friend_contact_dubai',
+        'friend_address_dubai',
+        'medical_concern',
+        'medications',
+        'doctor_or_clinic',
+        'joining_date'
     ];
 
     public function phonenos(): HasMany

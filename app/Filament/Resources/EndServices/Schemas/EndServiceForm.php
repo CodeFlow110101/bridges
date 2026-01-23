@@ -36,8 +36,7 @@ class EndServiceForm
                                 DatePicker::make("text")->native(false)->label(fn($get) => $get("question"))->requiredIfAccepted('is_complete')->validationAttribute('question')->disabled(fn(Get $get): bool => !$get('is_complete')),
                                 Radio::make('is_complete')
                                     ->label("Complete/ Incomplete")
-                                    ->boolean(trueLabel: 'Complete!')
-                                    ->boolean(falseLabel: 'Incomplete')
+                                    ->boolean(trueLabel: 'Complete', falseLabel: 'Incomplete')
                                     ->inline()
                                     ->live()
                             ])->deletable(false)->reorderable(false)->addable(false)->label(fn() => new HtmlString("<div></div>"))->mutateRelationshipDataBeforeFillUsing(function (array $data) use ($questions): array {
