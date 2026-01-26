@@ -11,11 +11,16 @@ class StaffEnrollmentTraining extends Model
     protected $table = "staff_enrollment_training";
 
     protected $fillable = [
-        'employee_name',
+        'user_id',
         'highest_qualification',
         'department_id',
         'supervisor',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, "user_id", "id");
+    }
 
     public function department(): BelongsTo
     {

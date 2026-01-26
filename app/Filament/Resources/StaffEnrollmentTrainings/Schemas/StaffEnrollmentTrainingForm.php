@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\StaffEnrollmentTrainings\Schemas;
 
+use App\Models\User;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
@@ -13,6 +14,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Tables\Columns\TextColumn;
 
 class StaffEnrollmentTrainingForm
@@ -21,8 +23,19 @@ class StaffEnrollmentTrainingForm
     {
         return $schema
             ->components([
-                TextInput::make('employee_name')
-                    ->required(),
+                Select::make('user_id')
+                    ->relationship(name: 'user')
+                    ->native(false)
+                    ->required()
+                    ->live()
+                    ->getOptionLabelFromRecordUsing(fn(User $record) => "{$record->first_name} {$record->last_name} ({$record->staff_id}) (Dept: {$record->department?->name})")
+                    ->afterStateUpdated(function ($state, Get $get, Set $set, $livewire) {
+                        $user = User::find($state);
+                        $set("department_name", $user?->department?->name);
+                    }),
+                TextInput::make("department_name")->formatStateUsing(function ($get) {
+                    return User::find($get("user_id"))?->department?->name;
+                })->disabled(),
                 TextInput::make('highest_qualification'),
                 Select::make('department_id')
                     ->required()

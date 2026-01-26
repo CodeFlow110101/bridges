@@ -29,6 +29,7 @@ class Enquiry extends Model
         'is_report_provided',
         'other_info',
         'is_client_satisfied',
+        'is_client_satisfied_description',
         'date_of_enquiry_answered',
         'description_of_response',
         'is_appoinment_booked',

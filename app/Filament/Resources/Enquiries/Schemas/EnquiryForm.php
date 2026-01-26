@@ -23,7 +23,7 @@ class EnquiryForm
         return $schema
             ->components([
                 TextInput::make('inquiry_number')->hiddenOn("create")->readOnly()->label('Inquiry Number'),
-                DatePicker::make('date')->hiddenOn("create")->readOnly(),
+                DatePicker::make('date')->hiddenOn("create"),
                 TextInput::make('name')->required(),
                 TextInput::make('phone_no')
                     ->required()
@@ -89,7 +89,11 @@ class EnquiryForm
                         Toggle::make('is_client_satisfied')
                             ->label("Is Client satisfied with information provided?")
                             ->inline(false)
+                            ->live()
                             ->required(),
+                        Textarea::make('is_client_satisfied_description')
+                            ->hidden(fn(Get $get): bool => $get('is_client_satisfied'))
+                            ->columnSpanFull()
                     ])->columnSpanFull(),
                 Section::make("Referral of enquiry to Supervisor/HOD/Clinic manager or relevant Individual")
                     ->schema([
