@@ -13,6 +13,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Text;
 use Filament\Support\Enums\TextSize;
+use App\Models\Enquiry;
 
 class DemonstrationTherapyForm
 {
@@ -27,8 +28,14 @@ class DemonstrationTherapyForm
                     ->required()
                     ->preload()
                     ->columnSpanFull()
-                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number'),
+                    ->live()
+                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number')
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        $enquiry = Enquiry::find($state);
+                        $set('name', $enquiry?->name);
+                    }),
                 TextInput::make('name')
+                ->disabled()
                     ->required(),
                 DatePicker::make('session_date')->native(false)
                     ->required(),
@@ -36,7 +43,7 @@ class DemonstrationTherapyForm
                     ->required()->native(false),
                 TextInput::make('caregiver_name'),
                 TextInput::make('other_infomration'),
-                DatePicker::make('date')->native(false),
+                DatePicker::make('date')->native(false)->label("Date of demonstration"),
                 Text::make("1. Features of caregiver(During Intervention procedure)")->size(TextSize::Large)->columnSpanFull(),
                 Section::make("Msl")
                     ->schema([
@@ -51,6 +58,7 @@ class DemonstrationTherapyForm
                             ->options(DemonstrationTherapy::mslOptions()),
                         Radio::make('whom_msl')
                             ->inline()
+                            ->label("Whom communicate to: (MSL)")
                             ->options(DemonstrationTherapy::mslOptions()),
                     ])->columnSpanFull(),
                 Textarea::make('other_information')
@@ -60,9 +68,8 @@ class DemonstrationTherapyForm
                 Textarea::make('concern_of_patient')
                     ->columnSpanFull(),
                 Text::make("Intervention records")->size(TextSize::Large),
-                FileUpload::make('information_from_parent')
+                Textarea::make('information_from_parent')
                     ->label("Information received through parent/caregiver on client’s preference")
-                    ->directory('files')
                     ->columnSpanFull(),
                 Textarea::make('client_observations')
                     ->label("Client observation: Preferences, concerns noted, associated issues")
@@ -73,6 +80,7 @@ class DemonstrationTherapyForm
                 FileUpload::make('session_report')
                     ->label("Demonstration session report")
                     ->directory('files')
+                    ->downloadable()
                     ->columnSpanFull(),
             ]);
     }

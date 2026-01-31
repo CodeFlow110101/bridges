@@ -10,6 +10,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Text;
 use Filament\Support\Enums\TextSize;
+use App\Models\Enquiry;
 
 class MOMForm
 {
@@ -24,8 +25,16 @@ class MOMForm
                     ->required()
                     ->preload()
                     ->columnSpanFull()
-                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number'),
+                    ->live()
+                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number')
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        $enquiry = Enquiry::find($state);
+                        if ($enquiry) {
+                            $set('name', $enquiry->name);
+                        }
+                    }),
                 TextInput::make('name')
+                    ->disabled()
                     ->required(),
                 DatePicker::make('date_of_birth')->native(false),
                 DatePicker::make('session_date')->native(false),

@@ -168,10 +168,6 @@
                         @endif
                     </div>
                 </div>
-                <div class="info-item">
-                    <div class="info-label">File</div>
-                    <div class="info-value">{{ $record->file ?? 'N/A' }}</div>
-                </div>
             </div>
         </div>
     </div>

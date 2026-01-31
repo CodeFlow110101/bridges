@@ -58,7 +58,11 @@ class User extends Authenticatable implements HasName
         'medical_concern',
         'medications',
         'doctor_or_clinic',
-        'joining_date'
+        'joining_date',
+        'insurance_status',
+        'status',
+        'visa_status',
+        'license_status',
     ];
 
     public function phonenos(): HasMany

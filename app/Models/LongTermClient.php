@@ -23,6 +23,9 @@ class LongTermClient extends Model
         'cost_on_cheque',
         'contract_no_of_months',
         'alert_to_generate_on',
+        'cheque_name',
+        'cheque_date',
+        'check_photo',
     ];
 
     public function enquiry(): BelongsTo

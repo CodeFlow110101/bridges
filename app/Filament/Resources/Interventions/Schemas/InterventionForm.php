@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Interventions\Schemas;
 
 use App\Models\Intervention;
+use App\Models\Enquiry;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -27,8 +28,48 @@ class InterventionForm
                     ->native(false)
                     ->searchable()
                     ->preload()
+                    ->live()
                     ->required()
-                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number'),
+                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number')
+                    ->afterStateUpdated(function (?string $state, ?string $old, $set) {
+                        $enquiry = Enquiry::find($state);
+                        $set('enquiry_name', $enquiry?->name);
+                        $set('phone_no', $enquiry?->phone_no);
+                        $set('referral_source', collect(Enquiry::referralSourceOptions())->get($enquiry?->referral_source));
+                        $set('cost_of_service', $enquiry?->cost_of_service);
+                        $set('other_info', $enquiry?->other_info);
+                        $set('is_client_satisfied_description', $enquiry?->is_client_satisfied_description);
+                }),
+                TextInput::make('enquiry_name')
+                ->formatStateUsing(fn($record): ?string => Enquiry::find($record->inquiry_id)?->name)
+                    ->disabled()
+                    ->columnSpanFull()
+                    ->required(),
+                TextInput::make('phone_no')
+                ->formatStateUsing(fn($record): ?string => Enquiry::find($record->inquiry_id)?->phone_no)
+                    ->disabled()
+                    ->columnSpanFull()
+                    ->required(),
+                TextInput::make('referral_source')
+                ->formatStateUsing(fn($record): ?string => collect(Enquiry::referralSourceOptions())->get(Enquiry::find($record->inquiry_id)?->referral_source))
+                    ->disabled()
+                    ->columnSpanFull()
+                    ->required(),
+                TextInput::make('cost_of_service')
+                ->formatStateUsing(fn($record): ?string => Enquiry::find($record->inquiry_id)?->cost_of_service)
+                    ->disabled()
+                    ->columnSpanFull()
+                    ->required(),
+                TextInput::make('other_info')
+                ->formatStateUsing(fn($record): ?string => Enquiry::find($record->inquiry_id)?->other_info)
+                    ->disabled()
+                    ->columnSpanFull()
+                    ->required(),
+                 TextInput::make('is_client_satisfied_description')
+                ->formatStateUsing(fn($record): ?string => Enquiry::find($record->inquiry_id)?->is_client_satisfied_description)
+                    ->disabled()
+                    ->columnSpanFull()
+                    ->required(),
                 DatePicker::make('date')
                     ->native(false)
                     ->required(),
@@ -80,6 +121,7 @@ class InterventionForm
                         Textarea::make('caregiver_relationship')
                             ->columnSpanFull(),
                         Textarea::make('caregiver_other_info')
+                        ->label("Other Information")
                             ->columnSpanFull(),
                         Toggle::make('has_caregiver_relevant_info')
                             ->label("Has relevant information given to the therapist /consultant (who will be handling client)? *")
@@ -130,6 +172,7 @@ class InterventionForm
                             ->live(),
                         DateTimePicker::make('schedule_date_time')->native(false)->hidden(fn(Get $get): bool => !$get('is_schedule')),
                         TextInput::make('schedule_supervisor_name')->hidden(fn(Get $get): bool => !$get('is_schedule')),
+                        Textarea::make('no_schedule_therapy_plan_reason')->hidden(fn(Get $get): bool => $get('is_schedule')),
                     ])
             ])->columns(1);
     }

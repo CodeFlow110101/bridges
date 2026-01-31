@@ -12,7 +12,6 @@ class MOM extends Model
 
     protected $fillable = [
         'inquiry_id',
-        'name',
         'date_of_birth',
         'session_date',
         'date_of_mom',

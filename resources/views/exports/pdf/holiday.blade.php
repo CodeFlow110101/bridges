@@ -145,16 +145,8 @@
                     <div class="info-value">{{ $record->information_from_parent ?? 'N/A' }}</div>
                 </div>
                 <div class="info-item full-width">
-                    <div class="info-label">Client Observations</div>
-                    <div class="info-value">{{ $record->client_observations ?? 'N/A' }}</div>
-                </div>
-                <div class="info-item full-width">
                     <div class="info-label">Supervisor to be Aware of</div>
                     <div class="info-value">{{ $record->supervisor_to_be_aware_of ?? 'N/A' }}</div>
-                </div>
-                <div class="info-item full-width">
-                    <div class="info-label">Cheat Sheet</div>
-                    <div class="info-value">{{ $record->cheat_sheet ?? 'N/A' }}</div>
                 </div>
                 <div class="info-item full-width">
                     <div class="info-label">Date of Upload</div>

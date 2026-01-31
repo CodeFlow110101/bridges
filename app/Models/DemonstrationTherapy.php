@@ -11,7 +11,6 @@ class DemonstrationTherapy extends Model
 
     protected $fillable = [
         'inquiry_id',
-        'name',
         'session_date',
         'date_of_birth',
         'caregiver_name',

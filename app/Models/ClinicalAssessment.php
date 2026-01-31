@@ -11,9 +11,6 @@ class ClinicalAssessment extends Model
 
     protected $fillable = [
         'inquiry_id',
-        'name',
-        'date',
-        'referral_source',
         'discussed',
         'mother_msl',
         'father_msl',
@@ -30,6 +27,7 @@ class ClinicalAssessment extends Model
         'is_document_provided',
         'information_to_be_aware_of',
         'future_reference',
+        'document_description',
     ];
 
     public function enquiry(): BelongsTo

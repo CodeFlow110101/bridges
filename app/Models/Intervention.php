@@ -40,6 +40,7 @@ class Intervention extends Model
         'is_schedule',
         'schedule_date_time',
         'schedule_supervisor_name',
+        'no_schedule_therapy_plan_reason',
     ];
 
     public function enquiry(): BelongsTo

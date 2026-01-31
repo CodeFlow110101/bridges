@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Factories\Relationship;
 use Illuminate\Support\HtmlString;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 use Illuminate\Support\Str;
+use Filament\Forms\Components\Toggle;
 
 class UserForm
 {
@@ -54,6 +55,10 @@ class UserForm
                 DatePicker::make('date_of_birth')->native(false)->maxDate(now()->subYears(18))->default(now()->subYears(18))->required(),
                 DatePicker::make("joining_date")->date('d M Y')->native(false),
                 Select::make('department_id')->relationship('department', 'name')->required()->native(false),
+                Toggle::make("insurance_status"),
+                Toggle::make("status"),
+                Toggle::make("visa_status"),
+                Toggle::make("license_status"),
                 TextInput::make('basic_salary')->numeric()->nullable(),
                 TextInput::make('hra')->numeric()->nullable(),
                 TextInput::make('other_allowances')->numeric()->nullable(),

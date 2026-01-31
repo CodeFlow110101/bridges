@@ -173,10 +173,6 @@
                     <div class="info-value">{{ $record->supervisor_to_be_aware_of ?? 'N/A' }}</div>
                 </div>
                 <div class="info-item full-width">
-                    <div class="info-label">Session Report</div>
-                    <div class="info-value">{{ $record->session_report ?? 'N/A' }}</div>
-                </div>
-                <div class="info-item full-width">
                     <div class="info-label">Other Information</div>
                     <div class="info-value">{{ $record->other_information ?? 'N/A' }}</div>
                 </div>

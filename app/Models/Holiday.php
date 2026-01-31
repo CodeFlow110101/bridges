@@ -11,7 +11,6 @@ class Holiday extends Model
 
     protected $fillable = [
         'inquiry_id',
-        'name',
         'date_of_birth',
         'mother_msl',
         'father_msl',

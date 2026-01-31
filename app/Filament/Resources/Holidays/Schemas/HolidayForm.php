@@ -6,6 +6,7 @@ use App\Models\Holiday;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
+use App\Models\Enquiry;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -24,9 +25,17 @@ class HolidayForm
                     ->searchable()
                     ->required()
                     ->preload()
+                    ->live()
                     ->columnSpanFull()
-                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number'),
+                    ->relationship(name: 'enquiry', titleAttribute: 'inquiry_number')
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        $enquiry = Enquiry::find($state);
+                        if ($enquiry) {
+                            $set('name', $enquiry->name);
+                        }
+                    }),
                 TextInput::make('name')
+                ->disabled()
                     ->required(),
                 DatePicker::make('date_of_birth')->native(false),
                 Section::make("Msl")
@@ -41,16 +50,17 @@ class HolidayForm
                             ->inline()
                             ->options(Holiday::mslOptions()),
                         Radio::make('whom_msl')
+                            ->label("Whom communicate to: (MSL)")
                             ->inline()
                             ->options(Holiday::mslOptions()),
                     ])->columnSpanFull(),
-                TextInput::make('caregiver_name'),
-                TextInput::make('other_infomration'),
+                TextInput::make('caregiver_name')->label("Caregiver’s Name and relationship (If any)"),
                 Textarea::make('other_information')
                     ->columnSpanFull(),
                 Textarea::make('approach_used')
                     ->columnSpanFull(),
                 Textarea::make('concern_of_patient')
+                ->label("Concerns of Parent")
                     ->columnSpanFull(),
                 Textarea::make('information_from_parent')
                     ->columnSpanFull(),
